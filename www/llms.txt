@@ -1,6 +1,6 @@
 # api.storyboards.sgit.ai
 
-> The developer site of the storyboard kit, which draws storyboards (JSON) as sketchy SVG panels in the browser, served in immutable versioned folders. Current release v0.1.0 at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/ (manifest: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json). Site v0.2.0.
+> The developer site of the storyboard kit, which draws storyboards (JSON) as sketchy SVG panels in the browser, served in immutable versioned folders. Current release v0.1.0 at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/ (manifest: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json). Site v0.2.1.
 
 Every page has a markdown twin: replace .html with .md. Code in a release folder is never changed; see policies/code-immutability.md.
 The agent behaviour policy of this site: https://api.storyboards.sgit.ai/abp/index.md (data: https://api.storyboards.sgit.ai/abp/abp.json).

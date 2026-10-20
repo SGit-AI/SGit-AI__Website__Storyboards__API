@@ -2,6 +2,12 @@
  "what": "One line per push to dev, newest first: the repository's version (tools/version.json 'version'), the kit release it serves as newest, and what changed. site/build.py refuses a version without its line.",
  "versions": [
   {
+   "version": "v0.2.1",
+   "date": "2026-10-20",
+   "release": "v0.1.0",
+   "what": "Two findings from the Lab recorded in REALITY.md for the next kit release, nothing in the kit changed: play() does not start the stroke draw-in in Chromium 141 (the .sb-panel.play path[pathLength] rule is not restyled on the class change; the scrolly experiment works round it with an inline stroke-dasharray), and play() has no promise or event for when an arrival ends. Also asked for by the experiments: the bubble, caption, setting, props and face as exported functions, a walk pose, data-who on actors and bubbles. The kit is unchanged: release v0.1.0."
+  },
+  {
    "version": "v0.2.0",
    "date": "2026-10-20",
    "release": "v0.1.0",

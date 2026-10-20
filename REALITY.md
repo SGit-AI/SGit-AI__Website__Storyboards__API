@@ -1,4 +1,4 @@
-# Reality: what exists, as of repository v0.2.0, kit release v0.1.0 (20 October 2026)
+# Reality: what exists, as of repository v0.2.1, kit release v0.1.0 (20 October 2026)
 
 A feature not in this file does not exist.
 
@@ -20,6 +20,9 @@ A feature not in this file does not exist.
 - The Behaviour policy page (`/abp/`), from `policies/abp.json`: 3 agents and automations, the layers of control, the grant, the mandate, 9 rules (ABP-SB-001, 003 to 010), 7 of them rated setting (a check that runs) and 2 expectation. The test harness fails any request to a third-party host (ABP-SB-009); CI refuses an edit to a brief already on dev (ABP-SB-006).
 
 ## Does not exist yet
+
+- Known in release v0.1.0, found by the Lab (storyboards.sgit.ai/lab/): `play()` does not start the stroke draw-in in Chromium 141 (the `.sb-panel.play path[pathLength]` rule is not restyled when the class changes; setting `stroke-dasharray` inline on each path after `play()` makes it run), and `play()` gives no promise or event for the end of an arrival. Both are for the next release; a published release is never edited.
+- Asked for by the Lab's experiments, not yet in the kit: the bubble, caption, setting, props and face exported as functions; a walk pose; `data-who` on actors and bubbles, a class on the caption and the floor; prop drawings with their sizes; a mood change without a full redraw.
 
 - A boundary for ABP-SB-001: every control is a setting (files the agent can write). Branch protection on `dev` requiring the `ci` check, and CODEOWNERS on the policy's files, are GitHub settings only a person can make.
 - A ledger of the hook's decisions (footprint): refusals are seen in the session, not recorded.
