@@ -17,6 +17,8 @@ A feature not in this file does not exist.
 - The developer website (v0.2.0): guides, reference, the live gallery (every kind, setting, prop, pose and mood of the release), the graph format, internals, the patches against upstream as diffs, a page per release, tests, CI, the release process, a documentation sidebar.
 - ABP-SB-001, code immutability: the prose (`policies/code-immutability.md`), the compiled half (`policies/code-immutability.policy.json`), the Claude Code hook (deny on published releases, ask on the policy's own files, instructions at SessionStart), the git pre-commit hook, and `tests/test_policy.py`, run in CI. The same hook is wired into storyboards.sgit.ai's `.claude/settings.json`.
 
+- The Behaviour policy page (`/abp/`), from `policies/abp.json`: 3 agents and automations, the layers of control, the grant, the mandate, 9 rules (ABP-SB-001, 003 to 010), 7 of them rated setting (a check that runs) and 2 expectation. The test harness fails any request to a third-party host (ABP-SB-009); CI refuses an edit to a brief already on dev (ABP-SB-006).
+
 ## Does not exist yet
 
 - A boundary for ABP-SB-001: every control is a setting (files the agent can write). Branch protection on `dev` requiring the `ci` check, and CODEOWNERS on the policy's files, are GitHub settings only a person can make.

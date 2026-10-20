@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://api.storyboards.sgit.ai/about/participant.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/abp/</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/brief/2026-10-20__a-behaviour-policy-page-on-every-site.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/brief/2026-10-20__code-immutability-and-the-developer-site.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/brief/2026-10-20__storyboards-sgit-ai.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/brief/</loc></url>

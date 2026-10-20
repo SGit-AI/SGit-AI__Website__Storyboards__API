@@ -67,6 +67,12 @@ try {
     assert.equal(await page.evaluate(() => typeof window.StoryboardFormats), 'undefined');
     await page.close();
   });
+  await t('negative control: a request to a third-party host is caught (ABP-SB-009)', async () => {
+    const { page, errors } = await open(ctx, '<!doctype html><title>n</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat">');
+    await page.waitForTimeout(400);
+    assert.ok(errors.some((e) => e.startsWith('third-party request: https://fonts.googleapis.com/')), errors.join('; '));
+    await page.close();
+  });
   await t('exports: SVG (still and animated, fonts linked and embedded), the sheet, PNG and a JPEG thumbnail', async () => {
     const bundle = readFileSync(join(ROOT, 'tests/fixtures/gen-z.bundle.json'), 'utf8');
     const { page, errors } = await open(ctx, `<!doctype html><title>x</title><script src="${BASE}vendor/rough-4.6.6.js"></script><script src="${BASE}storyboard.js"></script><script src="${BASE}export.js"></script>`);

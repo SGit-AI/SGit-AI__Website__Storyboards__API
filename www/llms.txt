@@ -3,6 +3,7 @@
 > The developer site of the storyboard kit, which draws storyboards (JSON) as sketchy SVG panels in the browser, served in immutable versioned folders. Current release v0.1.0 at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/ (manifest: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json). Site v0.2.0.
 
 Every page has a markdown twin: replace .html with .md. Code in a release folder is never changed; see policies/code-immutability.md.
+The agent behaviour policy of this site: https://api.storyboards.sgit.ai/abp/index.md (data: https://api.storyboards.sgit.ai/abp/abp.json).
 
 ## Start
 
@@ -37,6 +38,7 @@ Every page has a markdown twin: replace .html with .md. Code in a release folder
 
 ## Policies
 
+- [Agent behaviour policy](https://api.storyboards.sgit.ai/abp/index.md): The agents that work on api.storyboards.sgit.ai, what they can do, what they are asked to do, and what stands in the way of each rule.
 - [Policies](https://api.storyboards.sgit.ai/policies/index.md): The agent behaviour policies this repository runs under, and how each is enforced.
 - [Code immutability](https://api.storyboards.sgit.ai/policies/code-immutability.md): Code in a published release folder is never changed, by any agent, for any reason. The behaviour policy for that one line, in riskmandate.ai's shape, and the hooks, gate and CI that enforce it.
 

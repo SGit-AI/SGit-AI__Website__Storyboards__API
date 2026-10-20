@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A behaviour policy page, top level, on every site · api.storyboards.sgit.ai</title>
+<meta name="description" content="A top-level page on each site that captures its agent behaviour policy, the structure in place and the agents, to be added to every site and mapped as the policies are refactored across them.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/brief/2026-10-20__a-behaviour-policy-page-on-every-site.html">
+<link rel="alternate" type="text/markdown" href="2026-10-20__a-behaviour-policy-page-on-every-site.md">
+<meta property="og:title" content="A behaviour policy page, top level, on every site">
+<meta property="og:description" content="A top-level page on each site that captures its agent behaviour policy, the structure in place and the agents, to be added to every site and mapped as the policies are refactored across them.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/brief/2026-10-20__a-behaviour-policy-page-on-every-site.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../abp/index.html">Behaviour policy</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="narrow">
+<article class="article"><h1>A behaviour policy page, top level, on every site</h1><p class="lede">A top-level page on each site that captures its agent behaviour policy, the structure in place and the agents, to be added to every site and mapped as the policies are refactored across them.</p><p><i>the person's words in a session; acted on the same day · 2026-10-20 · Dinis Cruz, in the Claude Code session that built both sites</i></p>
+<p>The person's message, as typed into the session (a voice transcription, published unchanged):</p>
+<blockquote>Can you also add a section, maybe top level section, I think that's quite important for ABPs, for the agent behavior policies, and where you start to capture the behavior policy that exists on this website and the structure we have in place and the agents, I think. And I think that's probably something that we'll probably add to every single website that we have. So we start to control it. And then, we, as we refactor some of these, you know, behavior policies to other sites, we then start mapping them, you know, to there. But yeah, make it a top level page.  And yes push both repos to dev</blockquote>
+<h2 id="as-the-agent-read-it">As the agent read it</h2>
+<div class="tablewrap"><table><thead><tr><th>The words</th><th>Read as</th><th>Done in</th></tr></thead><tbody><tr><td>"a top level section ... for the agent behavior policies"</td><td>a page in each site's top bar, at <code>/abp/</code></td><td>storyboards.sgit.ai and api.storyboards.sgit.ai</td></tr><tr><td>"the behavior policy that exists on this website and the structure we have in place and the agents"</td><td>the agents, the layers of control from a prompt to a host rule, the grant, the mandate, every rule with its barrier and what enforces it, and the gaps</td><td><code>policies/abp.json</code> in each repository, rendered by one renderer</td></tr><tr><td>"add to every single website that we have"</td><td>written as data with a type (<code>abp/site/v1</code>) and a renderer another site can copy</td><td>the page's last section says how</td></tr><tr><td>"as we refactor some of these behavior policies to other sites, we then start mapping them"</td><td>each rule names where it maps to: the riskmandate.ai catalogue, other sites' rules</td><td>the "Where each rule maps to" table</td></tr><tr><td>"So we start to control it"</td><td>each rule that was only prose and could be checked cheaply now is: imported storyboards by hash (ABP-SB-002), briefs unchanged on dev (ABP-SB-006), no third-party request from the kit (ABP-SB-009)</td><td>the build, CI, the test harness</td></tr></tbody></table></div></article>
+</main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="2026-10-20__a-behaviour-policy-page-on-every-site.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>

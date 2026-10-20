@@ -54,6 +54,8 @@ export async function open(ctx, html) {
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  // ABP-SB-009: the kit fetches nothing from a third party when it runs; any request to another host fails the test
+  page.on('request', (r) => { const h = new URL(r.url()).hostname; if (/^https?:/.test(r.url()) && !['api.storyboards.sgit.ai', 'embedder.example'].includes(h)) errors.push('third-party request: ' + r.url()); });
   await page.goto('https://embedder.example/index.html');
   return { page, errors };
 }

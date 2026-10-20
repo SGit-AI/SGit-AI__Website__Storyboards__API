@@ -26,6 +26,10 @@ Its twin is **[storyboards.sgit.ai](https://storyboards.sgit.ai)** ([SGit-AI__We
 | `tools/upstream/` | the exact files the kit began as, hashed, so the site can show every patch as a diff |
 | `tests/` | `test_formats.mjs` (Node), `test_policy.py` (the hooks, with refusals and allowed twins), `test_render.mjs` and `test_site.mjs` (Chromium, the host routed to this tree), fixtures from both origin sites |
 
+## The agent behaviour policy
+
+`policies/abp.json` (type `abp/site/v1`) describes the agents that work on this repository, what they can do, what they are asked to do, and every rule with its barrier and what enforces it. It is rendered as the site's top-level Behaviour policy page, `/abp/`, by the renderer shared with the twin repository (`site/abp.py` here, `admin/build/abp.py` there; `tests/test_policy.py` holds them equal), and is the shape to copy to every other site.
+
 ## The release rule
 
 1. Change `src/` only after `python3 tools/release.py bump patch` (or `minor`), which moves the version in `tools/version.json` and in each file's `VERSION`.

@@ -41,6 +41,7 @@ The storyboards themselves, and what they are for, are on [storyboards.sgit.ai](
 
 ## Policies
 
+- [Agent behaviour policy](../abp/index.html): The agents that work on api.storyboards.sgit.ai, what they can do, what they are asked to do, and what stands in the way of each rule.
 - [Policies](../policies/index.html): The agent behaviour policies this repository runs under, and how each is enforced.
 - [Code immutability](../policies/code-immutability.html): Code in a published release folder is never changed, by any agent, for any reason. The behaviour policy for that one line, in riskmandate.ai's shape, and the hooks, gate and CI that enforce it.
 

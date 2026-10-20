@@ -119,4 +119,10 @@ for f in policy["self"]["paths_in_api_repo"]:
 n += 1
 print("ok the prose and the compiled halves agree (id, version, instructions, the files they name)")
 
+# one renderer for the behaviour policy page in both repositories
+if SIBLING.exists():
+    assert (ROOT / "site/abp.py").read_bytes() == (SIBLING / "admin/build/abp.py").read_bytes(), "site/abp.py and the twin's admin/build/abp.py have drifted"
+    n += 1
+    print("ok the behaviour policy renderer is the same file in both repositories")
+
 print(f"test_policy: {n} passed")
