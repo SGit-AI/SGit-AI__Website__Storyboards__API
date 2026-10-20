@@ -1,6 +1,6 @@
 # api.storyboards.sgit.ai
 
-> The storyboard kit: draws storyboards (JSON) as sketchy SVG panels in the browser, served in immutable versioned folders. Current release v0.1.0 at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/ (manifest: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json). Site v0.1.0.
+> The storyboard kit: draws storyboards (JSON) as sketchy SVG panels in the browser, served in immutable versioned folders. Current release v0.1.0 at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/ (manifest: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json). Site v0.1.1.
 
 Every page has a markdown twin: replace .html with .md.
 

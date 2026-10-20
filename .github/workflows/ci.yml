@@ -46,6 +46,8 @@ jobs:
         if: github.ref != 'refs/heads/dev'
         run: |
           set -euo pipefail
+          # a commit that is already on dev (a branch pushed alongside it) has nothing new to version
+          if git merge-base --is-ancestor HEAD origin/dev 2>/dev/null; then echo "this commit is already on dev"; exit 0; fi
           python3 - <<'PY'
           import json, subprocess, sys
           t = lambda v: tuple(int(x) for x in v[1:].split("."))

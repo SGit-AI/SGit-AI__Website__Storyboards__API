@@ -2,6 +2,12 @@
  "what": "One line per push to dev, newest first: the repository's version (tools/version.json 'version'), the kit release it serves as newest, and what changed. site/build.py refuses a version without its line.",
  "versions": [
   {
+   "version": "v0.1.1",
+   "date": "2026-10-20",
+   "release": "v0.1.0",
+   "what": "CI no longer asks a branch to bump the version when its commit is already on dev (a branch pushed alongside dev failed the check with nothing new in it). The kit is unchanged: release v0.1.0."
+  },
+  {
    "version": "v0.1.0",
    "date": "2026-10-20",
    "release": "v0.1.0",
