@@ -1,0 +1,14 @@
+{
+ "what": "Where each served file came from, copied into every release's manifest. A file not listed here was written in this repository.",
+ "files": {
+  "storyboard.js": "gen-z-developers.sgit.ai assets/storyboard.js, SGit-AI/SGit-AI__Website__Gen-Z-Developers commit e2a71808f2dbdc9d94167b9493b539f0c567b35c (sha256 86212ff563e0bb0289abe2f6e2f405670087a0ef29b0cdd11c3d9adce36aaf67, the same bytes pki.sgit.ai vendored), with four marked API PATCHes: prop packs (pki.sgit.ai's patch, generalised), the preferences key, the vocabulary/version/wire(), and an embed's start view",
+  "storyboard.css": "gen-z-developers.sgit.ai assets/storyboard.css, commit e2a71808, unchanged (sha256 6d8c968a1c3ba7f384aea9b05d443c18dbf3385927ba003e43ed18f8893cf59d)",
+  "props/security.js": "pki.sgit.ai assets/storyboard/pki-props.js, SGit-AI/SGit-AI__Website__PKI commit ab6affc9348ae390636405d2dd24b5db31a9663c, with one marked API PATCH: it registers as a prop pack",
+  "vendor/rough-4.6.6.js": "Rough.js 4.6.6 (MIT), as vendored by gen-z-developers.sgit.ai, unchanged (sha256 8589b8664aecfa7631d828dcaa731e2c686892eb5d842d6c147c790f21e16ae9)",
+  "vendor/rough-4.6.6.LICENSE.txt": "Rough.js licence (MIT)",
+  "fonts/caveat-700-latin.woff2": "Caveat 700, latin subset, Google Fonts (v23), SIL OFL 1.1",
+  "fonts/patrick-hand-400-latin.woff2": "Patrick Hand 400, latin subset, Google Fonts (v25), SIL OFL 1.1",
+  "fonts/OFL-Caveat.txt": "the Caveat licence, from github.com/google/fonts",
+  "fonts/OFL-PatrickHand.txt": "the Patrick Hand licence, from github.com/google/fonts"
+ }
+}

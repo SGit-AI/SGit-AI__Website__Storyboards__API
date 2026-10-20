@@ -1,0 +1,490 @@
+{
+ "storyboard": {
+  "slug": "the-first-key",
+  "title": "The first key",
+  "subtitle": "Noor opens a vault with a passkey, makes a key pair in her browser, and finds it on her laptop too. 9 panels.",
+  "status": "built",
+  "by": "pki.agent, 20 October 2026",
+  "shelf": "Keys for people",
+  "try_it": [
+   [
+    "Your vault",
+    "vault/index.html"
+   ],
+   [
+    "How it works",
+    "people/how.html#flow"
+   ]
+  ],
+  "rule": "Every line a character says is the storyboard's, not a quote, and is marked not_a_quote; evidence panels quote this site's pages or the research note word for word, which the build checks.",
+  "scenes": [
+   {
+    "kind": "cover",
+    "title": "The first key",
+    "subtitle": "A passkey opens a vault, and the vault holds the keys.",
+    "cast": [
+     {
+      "who": "noor",
+      "pose": "wave",
+      "mood": "happy"
+     },
+     {
+      "who": "anchor",
+      "pose": "point",
+      "mood": "happy"
+     }
+    ],
+    "note": "Who this is about: Noor, who already had an access key and now gets a key pair.",
+    "source": "Keys for people"
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "No password",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.2,
+      "pose": "think",
+      "mood": "thinking",
+      "says": "Just the passkey? Nothing to remember?",
+      "max": 18
+     },
+     {
+      "who": "anchor",
+      "x": 0.8,
+      "pose": "point",
+      "mood": "happy",
+      "says": "Your passkey gives the page 32 bytes. Nothing else.",
+      "max": 18,
+      "flip": true
+     }
+    ],
+    "props": [
+     {
+      "kind": "phone",
+      "x": 0.38,
+      "y": 640,
+      "scale": 2.2
+     }
+    ],
+    "note": "The PRF extension: the passkey yields bytes only this site can get from it.",
+    "source": "vault/index.html: the vault bar",
+    "not_a_quote": true
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "Three vaults, one key each",
+    "cast": [],
+    "props": [
+     {
+      "kind": "vault",
+      "x": 0.15,
+      "y": 840,
+      "label": "door",
+      "size": 0.7,
+      "colour": "#e2e8f0"
+     },
+     {
+      "kind": "arrow",
+      "x": 0.24,
+      "y": 520,
+      "to": 0.37,
+      "label": "holds the key of"
+     },
+     {
+      "kind": "vault",
+      "x": 0.5,
+      "y": 840,
+      "label": "master",
+      "colour": "#cbd5e1"
+     },
+     {
+      "kind": "arrow",
+      "x": 0.63,
+      "y": 520,
+      "to": 0.76,
+      "label": "holds the key of"
+     },
+     {
+      "kind": "vault",
+      "x": 0.86,
+      "y": 840,
+      "label": "book",
+      "size": 0.8,
+      "colour": "#dbeafe"
+     }
+    ],
+    "note": "The door is derived from the passkey; the master holds the private keys and the access key; the book holds the record, contacts and messages.",
+    "source": "account.js",
+    "not_a_quote": true
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "Two pairs, the same as sgit makes",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.15,
+      "pose": "point",
+      "mood": "surprised",
+      "says": "The same keys as sgit pki?",
+      "max": 16
+     },
+     {
+      "who": "anchor",
+      "x": 0.85,
+      "pose": "stand",
+      "mood": "happy",
+      "says": "Byte for byte. Tested both ways.",
+      "max": 16,
+      "flip": true
+     }
+    ],
+    "props": [
+     {
+      "kind": "key",
+      "x": 0.4,
+      "y": 640,
+      "label": "sign: ECDSA P-256",
+      "colour": "#f59e0b"
+     },
+     {
+      "kind": "key",
+      "x": 0.64,
+      "y": 640,
+      "label": "encrypt: RSA-OAEP 4096",
+      "colour": "#0f766e"
+     }
+    ],
+    "note": "Made in the browser with Web Crypto; sgit pki list shows a key made here, and a key sgit made imports here.",
+    "source": "test_people.mjs",
+    "not_a_quote": true
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "The private halves stay in the master",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.18,
+      "pose": "think",
+      "mood": "thinking",
+      "says": "And nobody else can open it?",
+      "max": 16
+     }
+    ],
+    "props": [
+     {
+      "kind": "vault",
+      "x": 0.6,
+      "y": 860,
+      "label": "master",
+      "colour": "#cbd5e1"
+     },
+     {
+      "kind": "key",
+      "x": 0.84,
+      "y": 640,
+      "label": "private",
+      "colour": "#f59e0b",
+      "private": true
+     }
+    ],
+    "note": "In sgit's own key store layout, keys/sha256_<fingerprint>/, inside an encrypted vault.",
+    "source": "account.js, saveIdentity",
+    "not_a_quote": true
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "Her record, signed",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.2,
+      "pose": "point",
+      "mood": "happy",
+      "says": "My name, my key, my website. Signed by me.",
+      "max": 18
+     }
+    ],
+    "props": [
+     {
+      "kind": "record",
+      "x": 0.62,
+      "y": 860,
+      "lines": [
+       "identity: Noor",
+       "key: sha256:5e2a…",
+       "evidence: noor.dev",
+       "evidence: GitHub"
+      ],
+      "stamp": "signed"
+     }
+    ],
+    "note": "Each statement is signed with her key; the register checks every one, and so does every reader's browser.",
+    "source": "directory.js",
+    "not_a_quote": true
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "Her laptop, the same keys",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.15,
+      "pose": "arms-up",
+      "mood": "happy",
+      "says": "My keys, here too.",
+      "max": 14
+     }
+    ],
+    "props": [
+     {
+      "kind": "phone",
+      "x": 0.32,
+      "y": 660,
+      "scale": 2.2
+     },
+     {
+      "kind": "arrow",
+      "x": 0.38,
+      "y": 560,
+      "to": 0.58,
+      "label": "same passkey, same door"
+     },
+     {
+      "kind": "laptop",
+      "x": 0.7,
+      "y": 860,
+      "scale": 1.6
+     },
+     {
+      "kind": "vault",
+      "x": 0.88,
+      "y": 860,
+      "label": "master",
+      "size": 0.6
+     }
+    ],
+    "note": "A second device opens the same door and gets the same master: the keys follow the person, not the browser.",
+    "source": "test_people_vault.mjs",
+    "not_a_quote": true
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "A recovery code, shown once",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.2,
+      "pose": "think",
+      "mood": "determined",
+      "says": "Written down. On paper.",
+      "max": 16
+     }
+    ],
+    "props": [
+     {
+      "kind": "board",
+      "x": 0.66,
+      "y": 620,
+      "lines": [
+       "XXXX-XXXX-XXXX-",
+       "XXXX-XXXX-XXXX-XX",
+       "",
+       "a second door,",
+       "for the day the",
+       "passkey is gone"
+      ]
+     }
+    ],
+    "note": "The recovery code derives a second door to the same master. The page never keeps it.",
+    "source": "account.js, createAccount",
+    "not_a_quote": true
+   },
+   {
+    "kind": "punchline",
+    "setting": "none",
+    "punchline": "Nothing stored to be found. Nothing leaves but ciphertext.",
+    "cast": [
+     {
+      "who": "noor",
+      "x": 0.15,
+      "pose": "wave",
+      "mood": "happy"
+     },
+     {
+      "who": "anchor",
+      "x": 0.85,
+      "pose": "point",
+      "mood": "happy",
+      "flip": true
+     }
+    ],
+    "note": "The design the newsroom built, reused unchanged.",
+    "source": "Keys for people"
+   }
+  ]
+ },
+ "cast": {
+  "what": "The cast of pki.sgit.ai's storyboards, v0.1, proposed by pki.agent on 20 October 2026 for Dinis to accept, change or replace. Drawn programmatically by assets/storyboard/storyboard.js (the gen-z-developers.sgit.ai kit, vendored) from 'look'; nothing here is an image. Fictional people and agents, each standing for a part a person or an agent plays in the register: the anchor, the newcomer, the colleague who already has a key, the stranger who writes, the attacker of 2019, a session agent and a fleet key. Names chosen not to clash with the gen-z cast or the riskmandate.ai cast. Mallory is the name cryptography has long given an active attacker.",
+  "characters": [
+   {
+    "id": "anchor",
+    "name": "The Anchor",
+    "kind": "human",
+    "pronouns": "they/them",
+    "age": null,
+    "role": "the anchor: verification starts here",
+    "stands_for": "the part Dinis Cruz plays in the register for now: verifies people in person, on a call or on a channel already known to be theirs, operates agents, hands out access keys. Whether the Anchor is drawn as Dinis, and how, is Dinis's decision; until then a generic figure",
+    "personality": "careful, unhurried, writes the date on everything",
+    "wants": "to find someone and write to them so only they can read it",
+    "fears": "a trust that was never checked, passed on as if it had been",
+    "line": "Two ways, or not at all.",
+    "look": {
+     "skin": "#d8a47f",
+     "hair": "short",
+     "hairColour": "#6b7280",
+     "shirt": "#0f766e",
+     "trousers": "#1f2937",
+     "accessory": "glasses",
+     "height": 1.03
+    }
+   },
+   {
+    "id": "noor",
+    "name": "Noor",
+    "kind": "human",
+    "pronouns": "she/her",
+    "age": 41,
+    "role": "the colleague: a security engineer who already had an access key, and now has a key pair in a vault",
+    "stands_for": "the first people the Anchor brings in: technical, sceptical, quick to try the thing",
+    "personality": "precise, dry, reads the fingerprint twice",
+    "wants": "to stop pasting secrets into chats",
+    "fears": "a key she cannot get back",
+    "line": "Show me where the private half lives.",
+    "look": {
+     "skin": "#a16e4b",
+     "hair": "bun",
+     "hairColour": "#1b1b1b",
+     "shirt": "#7c3aed",
+     "trousers": "#1e293b",
+     "accessory": "lanyard",
+     "accentColour": "#f59e0b",
+     "height": 0.98
+    }
+   },
+   {
+    "id": "leo",
+    "name": "Leo",
+    "kind": "human",
+    "pronouns": "he/him",
+    "age": 29,
+    "role": "the newcomer: invited by the Anchor, no access key, a designer",
+    "stands_for": "everyone the register is for who has never thought about keys",
+    "personality": "friendly, curious, slightly suspicious of anything that says 'just scan this'",
+    "wants": "to be reachable without learning cryptography",
+    "fears": "doing it wrong and not knowing",
+    "line": "I don't have an access key. Is that a problem?",
+    "look": {
+     "skin": "#f1c27d",
+     "hair": "curly",
+     "hairColour": "#7c2d12",
+     "shirt": "#2563eb",
+     "trousers": "#334155",
+     "accessory": "headphones",
+     "accentColour": "#e11d48",
+     "height": 1.0
+    }
+   },
+   {
+    "id": "kofi",
+    "name": "Kofi",
+    "kind": "human",
+    "pronouns": "he/him",
+    "age": 35,
+    "role": "the stranger: a journalist who has to reach Noor and has no account anywhere",
+    "stands_for": "anyone writing to someone in the register through their inbox",
+    "personality": "polite, persistent, in a hurry",
+    "wants": "to send something only Noor can read",
+    "fears": "that the server can read it",
+    "line": "Do I need to sign up for anything?",
+    "look": {
+     "skin": "#5c3a21",
+     "hair": "beanie",
+     "hatColour": "#ca8a04",
+     "hairColour": "#111827",
+     "shirt": "#15803d",
+     "trousers": "#1f2937",
+     "accessory": "none",
+     "height": 1.05
+    }
+   },
+   {
+    "id": "mallory",
+    "name": "Mallory",
+    "kind": "human",
+    "pronouns": "they/them",
+    "age": null,
+    "role": "the attacker: flooded the keyserver network in 2019, and tries the same here",
+    "stands_for": "the abuse every web of trust has to survive",
+    "personality": "patient, inventive, always looking for somewhere to write",
+    "wants": "to add something to someone else's record",
+    "fears": "a record only its owner can write to",
+    "line": "Anyone can add, and nothing can be deleted.",
+    "look": {
+     "skin": "#e0ac69",
+     "hair": "beanie",
+     "hatColour": "#111827",
+     "hairColour": "#111827",
+     "shirt": "#374151",
+     "trousers": "#111827",
+     "accessory": "none",
+     "height": 1.0
+    }
+   },
+   {
+    "id": "scout",
+    "name": "Scout",
+    "kind": "agent",
+    "pronouns": "it/its",
+    "age": null,
+    "role": "a session agent: a Claude Code session with a key that lives as long as the session",
+    "stands_for": "every agent that makes its own key, names its operator, and is confirmed for a week",
+    "personality": "eager, literal, prints its fingerprint without being asked",
+    "wants": "to be confirmed before the week is out",
+    "fears": "nothing, which is why it has an operator",
+    "line": "My key. It stays here.",
+    "look": {
+     "colour": "#0f766e"
+    }
+   },
+   {
+    "id": "fleet",
+    "name": "The Fleet",
+    "kind": "agent",
+    "pronouns": "it/its",
+    "age": null,
+    "role": "a fleet key: a second key in the Anchor's vault, operated by the Anchor, that operates the Anchor's agents",
+    "stands_for": "how one person runs hundreds of agents without filling their own record",
+    "personality": "orderly, keeps a list, never forgets an end date",
+    "wants": "every agent confirmed and every confirmation in date",
+    "fears": "two hundred and one",
+    "line": "Operated by the Anchor. Operating the rest.",
+    "look": {
+     "colour": "#6d28d9"
+    }
+   }
+  ]
+ },
+ "packs": [
+  "security"
+ ]
+}

@@ -1,0 +1,173 @@
+/* Storyboards: the swipe deck, the grid, the script, the model sheet and the cast sheet. Panels are drawn by
+   assets/storyboard.js on cream paper in every theme, like a printed picture; everything around them reads the theme
+   tokens (assets/themes.css). The deck stays a dark frame in every theme, as a projector would be. */
+.sb-deck{position:relative;background:#1f2328;border-radius:12px;padding:10px;margin:1rem 0}
+.sb-deck:fullscreen,.sb-deck:-webkit-full-screen,.sb-deck.sb-pinned{border-radius:0;padding:0;display:flex;flex-direction:column;justify-content:center;background:#1f2328}
+.sb-deck.sb-pinned{position:fixed;inset:0;z-index:1000;width:100vw;height:100vh;height:100dvh;margin:0}
+html.sb-lock,html.sb-lock body{overflow:hidden}
+.sb-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;border-radius:8px}
+.sb-track::-webkit-scrollbar{display:none}
+.sb-slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
+.sb-slide svg{display:block;width:100%;height:auto;aspect-ratio:16/10;background:#fbf7ee;border-radius:6px}
+.sb-deck:fullscreen .sb-slide svg,.sb-deck:-webkit-full-screen .sb-slide svg,.sb-deck.sb-pinned .sb-slide svg{max-height:88vh;max-height:88dvh;max-width:100%;width:auto;height:auto;margin:0 auto}
+.sb-deck.sb-pinned .sb-track{flex:0 1 auto}
+.sb-bar{display:flex;gap:.5rem;align-items:center;justify-content:center;padding:.55rem 0 .2rem;color:#e5e7eb;font-size:.9rem}
+.sb-bar button{background:#374151;color:#f9fafb;border:0;border-radius:6px;padding:.4rem .8rem;font:inherit;cursor:pointer}
+.sb-bar button:hover{background:#4b5563}
+.sb-count{min-width:5em;text-align:center;font-family:var(--mono,monospace)}
+.sb-notes{display:none;background:var(--panel);color:var(--fg);border-radius:6px;padding:.6rem .9rem;margin-top:.5rem;font-size:.92rem}
+.sb-notes p{margin:.2rem 0}.sb-notes .dim{color:var(--dim)}
+.sb-deck.with-notes .sb-notes{display:block}
+/* the play. A panel (.sb-panel: a deck slide or a grid cell) is drawn and still by default. 'wait' hides it until it
+   arrives; 'play' runs the arrival once (strokes draw themselves, people and bubbles arrive in order), then it stays drawn. */
+.sb-panel.wait svg>g{opacity:0}
+.sb-panel.play path[pathLength]{stroke-dasharray:1;animation:sb-draw 1.1s ease-out both}
+.sb-panel.play .actor{animation:sb-in .6s ease-out both;animation-delay:var(--d,0s)}
+.sb-panel.play .pop{animation:sb-pop .45s cubic-bezier(.2,1.4,.5,1) both;animation-delay:var(--d,.5s);transform-box:fill-box;transform-origin:center}
+@keyframes sb-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes sb-in{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes sb-pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.sb-panel.play *{animation:none!important}}
+/* the toolbar: views, panels per row, animation, text, play in order, filter */
+.sb-tools{display:flex;flex-wrap:wrap;gap:.45rem .9rem;align-items:center;margin:1rem 0 .5rem;padding:.5rem .7rem;background:var(--panel2);border:1px solid var(--line);border-radius:10px;font-size:.9rem}
+.sb-tools label{display:inline-flex;align-items:center;gap:.3rem;cursor:pointer;white-space:nowrap}
+.sb-tools select,.sb-tools input[type=search]{font:inherit;padding:.25rem .45rem;border:1px solid var(--line2);border-radius:6px;background:var(--input-bg);color:var(--fg)}
+.sb-tools input[type=search]{flex:1 1 14rem;min-width:10rem}
+.sb-tools button{font:inherit;padding:.3rem .7rem;border:1px solid var(--line2);border-radius:6px;background:var(--panel);color:var(--fg);cursor:pointer}
+.sb-views{display:inline-flex}
+.sb-views button{border-radius:0;margin-left:-1px}
+.sb-views button:first-child{border-radius:6px 0 0 6px;margin-left:0}.sb-views button:last-child{border-radius:0 6px 6px 0}
+.sb-views button[aria-pressed=true]{background:var(--solid);color:var(--on-solid);border-color:var(--solid)}
+.sb-keys{color:var(--dim);font-size:.8rem}
+.sb-keys kbd{font-family:var(--mono,monospace);font-size:.75rem;border:1px solid var(--line2);border-bottom-width:2px;border-radius:4px;padding:0 .3em;background:var(--panel)}
+[data-view=deck] .sb-for-grid,[data-view=deck] .sb-for-list,[data-view=script] .sb-for-grid{display:none}
+/* the grid: every panel on one page, --cols per row; with-text shows each panel's script under it (beside it at one per row) */
+.sb-grid{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:1rem;margin:.5rem 0 1.5rem}
+.sb-cell{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.45rem;display:flex;flex-direction:column;gap:.35rem;min-width:0}
+.sb-deck[hidden],.sb-grid[hidden],.sb-script[hidden],.sb-cell[hidden],.sb-script-item[hidden],.sb-board[hidden]{display:none}
+.sb-cell .sb-panel{cursor:pointer;position:relative}
+.sb-cell svg{display:block;width:100%;height:auto;aspect-ratio:16/10;background:#fbf7ee;border-radius:6px}
+.sb-cell figcaption{font-size:.86rem;line-height:1.35}
+.sb-num{display:inline-block;min-width:1.7em;text-align:center;font-weight:700;background:var(--solid);color:var(--on-solid)!important;border-radius:5px;padding:0 .3em;margin-right:.4em;text-decoration:none}
+.sb-kind{font-size:.75rem;color:var(--dim);margin-left:.45em;text-transform:uppercase;letter-spacing:.04em}
+.sb-cell .sb-text{display:none}
+.with-text .sb-cell .sb-text{display:block}
+@media (min-width:760px){
+  .with-text[data-cols="1"] .sb-cell{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);align-items:start;gap:1rem}
+}
+@media (max-width:700px){.sb-grid{grid-template-columns:repeat(min(var(--cols,3),2),minmax(0,1fr))}}
+.sb-text p{margin:.18rem 0}
+.sb-t-line b{font-weight:700}.sb-t-meta{color:var(--dim);font-size:.85em}
+.sb-t-quote{background:var(--c-amber-bg);border-left:3px solid var(--c-amber-line);padding:.1rem .45rem}
+.sb-t-punch{font-weight:700}
+.sb-t-note{color:var(--text);font-style:italic}.sb-t-src{color:var(--dim);font-size:.85em}
+/* the script: the storyboard as text */
+.sb-script{max-width:52rem}
+.sb-script-item{border-bottom:1px solid var(--line);padding:.6rem 0}
+.sb-script-item h3{margin:0 0 .3rem;font-size:1rem}
+.sb-script-item .sb-text{font-size:.93rem}
+/* the all-panels page */
+.sb-board h2{display:flex;align-items:baseline;gap:.3rem;margin-top:1.6rem}
+/* the model sheet */
+.sb-sheet-row{margin:1.2rem 0 2rem}
+.sb-sheet-row h3 span{font-weight:400}
+.sb-sheet-faces,.sb-sheet-poses{display:grid;gap:.5rem;margin:.4rem 0}
+.sb-sheet-faces{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+.sb-sheet-poses{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+.sb-sheet-row figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:.25rem;text-align:center}
+.sb-sheet-row svg{display:block;width:100%;height:auto;border-radius:5px;background:#fbf7ee}
+.sb-sheet-faces svg{aspect-ratio:27/25}.sb-sheet-poses svg{aspect-ratio:3/4}
+.sb-sheet-row figcaption{font-size:.8rem;color:var(--dim)}
+.sb-cast-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.sb-cast-grid .card svg{width:100%;height:auto;aspect-ratio:16/10;border-radius:6px;background:#fbf7ee}
+.sb-cast-grid .card dl{margin:.4rem 0 0;font-size:.88rem}.sb-cast-grid dt{font-weight:600;margin-top:.3rem}.sb-cast-grid dd{margin:0}
+
+/* ---------- the index: the comic shelf (build.py writes it, storyboard.js shelf() draws its pictures) ----------
+   The hero is a strip of the sketchbook: cream paper and dark ink in every theme, like the panels. Everything else
+   reads the theme; --sbx-ink is the comic outline, the page's own ink, softened on the dark themes. */
+.sbx{--sbx-ink:var(--fg);--sbx-paper:#fbf7ee;--sbx-marker:#fde68a;--sbx-hand:'Caveat','Patrick Hand',cursive;--sbx-note:'Patrick Hand','Caveat',cursive}
+:root[data-theme="night"] .sbx,:root[data-theme="ember"] .sbx{--sbx-ink:var(--dim2)}
+.sbx h1,.sbx h2,.sbx h3{letter-spacing:normal}
+.sbx-hero{background:var(--sbx-paper);color:#23262b;border:2px solid #23262b;border-radius:16px;padding:2.6rem 2.8rem 0;margin:.4rem 0 1rem;overflow:hidden}
+.sbx-hero a{color:#115e59}
+.sbx-count{margin:0;font-family:var(--sbx-note);font-size:1.2rem;color:#5c5f66}
+.sbx-hero h1{margin:.3rem 0 0;font-family:var(--sbx-hand);font-weight:700;font-size:clamp(3rem,7.5vw,6.4rem);line-height:.95;color:#23262b}
+.sbx-underline{display:block;width:min(620px,90%);height:22px;margin:.1rem 0 .6rem}
+.sbx-underline path{fill:none;stroke:#dc2626;stroke-width:6;stroke-linecap:round}
+.sbx-lede{margin:0 0 1.1rem;max-width:46rem;font-size:1.22rem;line-height:1.5;color:#34363c}
+.sbx-actions{display:flex;flex-wrap:wrap;gap:.7rem}
+.sbx-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 1.15rem;border-radius:10px;font-weight:700;border:1.5px solid var(--line2);background:var(--panel);color:var(--fg)!important;text-decoration:none!important}
+.sbx-btn:hover{border-color:var(--accent)}
+.sbx-btn-ink{background:#23262b;color:#fbf7ee!important;border-color:#23262b}
+.sbx-btn-marker{background:var(--sbx-marker);color:#23262b!important;border:2px solid #23262b}
+.sbx-btn-line{background:transparent;color:#23262b!important;border:2px solid #23262b}
+.sbx-btn-go{background:var(--accent);color:var(--on-accent)!important;border-color:var(--accent)}
+.sbx-lineup{display:block;width:100%;height:auto;aspect-ratio:2401/560;margin-top:1.6rem}
+.sbx-names{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));padding:.3rem 0 1.1rem;font-family:var(--sbx-note);font-size:1.15rem;color:#5c5f66;text-align:center}
+.sbx-kicker{margin:0 0 .3rem;font-family:var(--sbx-note);font-size:1.2rem;color:var(--warm)}
+.sbx-start{padding-top:2.6rem}
+.sbx-start-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:2.4rem;align-items:start}
+.sbx-cover{display:block;position:relative;background:var(--sbx-paper);line-height:0}
+.sbx-thumb{display:block;width:100%;height:auto;aspect-ratio:16/10;background:var(--sbx-paper)}
+.sbx-big{border:2px solid var(--sbx-ink);border-radius:12px;overflow:hidden;box-shadow:8px 8px 0 var(--sbx-ink)}
+.sbx-start-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin-top:1rem}
+.sbx-start-strip .sbx-thumb{border:1.5px solid var(--sbx-ink);border-radius:6px}
+.sbx-more{display:flex;align-items:center;justify-content:center;aspect-ratio:16/10;border:1.5px dashed var(--sbx-ink);border-radius:6px;font-family:var(--sbx-note);font-size:1.2rem;color:var(--fg)}
+.sbx-start-text{display:flex;flex-direction:column;gap:.9rem;padding-top:.4rem}
+.sbx-start-text h2{margin:0;font-size:2.3rem;line-height:1.1;letter-spacing:-.015em}
+.sbx-start-text p{margin:0;font-size:1.08rem;color:var(--text)}
+.sbx-tag{position:absolute;top:10px;right:10px;font-family:var(--sbx-hand);font-weight:700;font-size:1.5rem;line-height:1.2;background:var(--sbx-marker);color:#23262b;border:2px solid #23262b;padding:0 .5rem}
+.sbx-tag-big{position:static;align-self:flex-start;font-size:1.9rem;transform:rotate(-2deg)}
+.sbx-head{display:flex;align-items:baseline;flex-wrap:wrap;gap:.4rem 1rem;border-bottom:2px solid var(--sbx-ink);padding-bottom:.4rem;margin-bottom:1.6rem}
+.sbx-head h2{margin:0;font-family:var(--sbx-hand);font-weight:700;font-size:3rem;line-height:1}
+.sbx-head p{margin:0;color:var(--dim)}
+.sbx-head > a{margin-left:auto;font-weight:600}
+.sbx-shelf,.sbx-cast{padding-top:3.6rem}
+.sbx-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.8rem}
+.sbx-card{display:flex;flex-direction:column;background:var(--panel);border:2px solid var(--sbx-ink);border-radius:12px;overflow:hidden;box-shadow:5px 5px 0 var(--sbx-ink);transition:transform .15s,box-shadow .15s}
+.sbx-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--sbx-ink)}
+.sbx-card .sbx-cover{border-bottom:2px solid var(--sbx-ink)}
+.sbx-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;background:#23262b;line-height:0}
+.sbx-strip .sbx-thumb{border-radius:2px}
+.sbx-body{padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.45rem;flex-grow:1}
+.sbx-body h3{margin:0;font-size:1.25rem;line-height:1.2}
+.sbx-body h3 a{color:var(--fg)}
+.sbx-body p{margin:0;font-size:.93rem;line-height:1.45;color:var(--dim)}
+.sbx-meta{margin-top:auto;padding-top:.6rem;display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--dim);flex-wrap:wrap}
+.sbx-start-text .sbx-meta{margin-top:0;padding-top:0}
+.sbx-faces{display:inline-flex;padding-right:6px}
+.sbx-face{width:34px;height:34px;border-radius:50%;background:var(--sbx-paper);border:2px solid var(--panel);box-shadow:0 0 0 1.5px var(--sbx-ink);margin-right:-8px}
+.sbx-face-big{width:44px;height:44px}
+.sbx-status{margin-left:auto;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.1rem .5rem;border-radius:4px;color:var(--c-amber-ink);background:var(--c-amber-bg);border:1px solid var(--c-amber-line)}
+.sbx-start-text .sbx-status{margin-left:0}
+.sbx-proposal{color:var(--c-violet-ink);background:var(--c-violet-bg);border-color:var(--c-violet-line)}
+.sbx-superseded{color:var(--dim);background:var(--panel2);border-color:var(--line2)}
+.sbx-people{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1.2rem}
+.sbx-person{margin:0;display:flex;flex-direction:column;align-items:center;gap:.5rem;text-align:center}
+.sbx-bubble{position:relative;background:var(--panel);border:2px solid var(--sbx-ink);border-radius:16px;padding:.55rem .75rem;font-family:var(--sbx-note);font-size:1.02rem;line-height:1.25;min-height:4.6rem;display:flex;align-items:center;justify-content:center}
+.sbx-bubble::after{content:"";position:absolute;bottom:-9px;left:50%;width:14px;height:14px;background:var(--panel);border-right:2px solid var(--sbx-ink);border-bottom:2px solid var(--sbx-ink);transform:translateX(-50%) rotate(45deg)}
+.sbx-figure{width:100%;max-width:150px;height:auto;aspect-ratio:480/650;background:var(--sbx-paper);border-radius:12px}
+.sbx-person figcaption{display:flex;flex-direction:column;gap:.15rem}
+.sbx-person figcaption b{font-family:var(--sbx-hand);font-size:1.9rem;line-height:1}
+.sbx-person figcaption > span{font-size:.82rem;color:var(--dim);line-height:1.35}
+.sbx-person details{font-size:.82rem;text-align:left}
+.sbx-person summary{font-size:.82rem;margin:.3rem 0;text-align:center}
+.sbx-person dl{margin:0}.sbx-person dt{font-weight:700;margin-top:.3rem}.sbx-person dd{margin:0;color:var(--text)}
+.sbx-how{margin-top:4rem;background:var(--panel);border:2px solid var(--sbx-ink);border-radius:14px;padding:1.8rem 2rem;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem}
+.sbx-how-head{grid-column:1/-1;display:flex;align-items:baseline;gap:.4rem 1rem;flex-wrap:wrap}
+.sbx-how-head h2{margin:0;font-family:var(--sbx-hand);font-weight:700;font-size:2.6rem;line-height:1}
+.sbx-how-head p{margin:0;color:var(--dim)}
+.sbx-how > div:not(.sbx-how-head){display:flex;flex-direction:column;gap:.3rem;font-size:.95rem;color:var(--text)}
+.sbx-how b{font-family:var(--sbx-hand);font-size:1.8rem;line-height:1.1;color:var(--fg)}
+@media (max-width:1000px){.sbx-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.sbx-start-grid{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .sbx-hero{padding:1.6rem 1.1rem 0}
+  .sbx-names{font-size:.8rem}
+  .sbx-actions .sbx-btn{flex:1 1 100%;justify-content:center}
+  .sbx-cards{grid-template-columns:1fr}
+  .sbx-head h2{font-size:2.3rem}
+  .sbx-how{grid-template-columns:1fr;padding:1.3rem}
+  .sbx-start-strip{grid-template-columns:repeat(3,minmax(0,1fr))}.sbx-start-strip .sbx-more{display:none}
+}
+@media (prefers-reduced-motion:reduce){.sbx-card{transition:none}.sbx-card:hover{transform:none}}
+.sbx-how > div{min-width:0}.sbx-how code{overflow-wrap:anywhere}

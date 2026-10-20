@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The format · api.storyboards.sgit.ai</title>
+<meta name="description" content="A storyboard is one JSON file, its cast another. Every field the renderer reads, and every word of its vocabulary.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/docs/format.html">
+<link rel="alternate" type="text/markdown" href="format.md">
+<meta property="og:title" content="The format">
+<meta property="og:description" content="A storyboard is one JSON file, its cast another. Every field the renderer reads, and every word of its vocabulary.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/docs/format.html">
+<meta name="site-version" content="v0.1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../docs/quick-start.html">Quick start</a><a href="../docs/format.html">Format</a><a href="../docs/javascript.html">JavaScript</a><a href="../docs/versioning.html">Versioning</a><a href="../releases/index.html">Releases</a><a href="../brief/index.html">The brief</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.1.0</a> &middot; kit <a href="../v0/v0.1/v0.1.0/manifest.json">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="narrow">
+<article class="article"><h1>The format</h1><p class="lede">A storyboard is one JSON file, its cast another. Every field the renderer reads, and every word of its vocabulary.</p><p>The 23 storyboards on <a href="https://storyboards.sgit.ai/catalogue.json">storyboards.sgit.ai</a> are the worked examples: each has its <code>storyboard.json</code> and its series' <code>cast.json</code> beside it. <code>StoryboardFormats.validate(storyboard, cast, { props })</code> runs every check below and returns the problems, in Node or a browser.</p>
+<h2 id="a-storyboard">A storyboard</h2>
+<div class="tablewrap"><table><thead><tr><th>Field</th><th>Required</th><th>What it is</th></tr></thead><tbody><tr><td><code>slug</code></td><td>yes</td><td>lower-case-with-dashes, the storyboard's name in a URL</td></tr><tr><td><code>title</code></td><td>yes</td><td>the title</td></tr><tr><td><code>subtitle</code></td><td></td><td>one line under it</td></tr><tr><td><code>status</code></td><td></td><td><code>draft</code>, <code>built</code>, <code>proposed</code>, <code>superseded</code>: shown as a pill</td></tr><tr><td><code>by</code></td><td></td><td>who made it, and when</td></tr><tr><td><code>rule</code></td><td></td><td>the rule its lines follow (e.g. that every line is the storyboard's, not a quote)</td></tr><tr><td><code>scenes</code></td><td>yes</td><td>the panels, in order</td></tr></tbody></table></div>
+<h2 id="a-panel-a-scene">A panel (a scene)</h2>
+<div class="tablewrap"><table><thead><tr><th>Field</th><th>For</th><th>What it is</th></tr></thead><tbody><tr><td><code>kind</code></td><td>all</td><td>one of the kinds below; <code>scene</code> if absent</td></tr><tr><td><code>caption</code></td><td>most</td><td>the yellow caption box</td></tr><tr><td><code>title</code>, <code>subtitle</code></td><td><code>cover</code></td><td>the cover's text</td></tr><tr><td><code>punchline</code></td><td><code>punchline</code></td><td>the big line, underlined in red</td></tr><tr><td><code>setting</code></td><td><code>scene</code>, <code>evidence</code>, <code>punchline</code>, <code>spectrum</code></td><td>the background</td></tr><tr><td><code>cast</code></td><td>all</td><td>who is in the panel: <code>{ who, x, pose, mood, says, thinks, flip, max, scale, lift }</code></td></tr><tr><td><code>props</code></td><td><code>scene</code></td><td>things in the panel: <code>{ kind, x, y, scale, label, lines, colour, ... }</code></td></tr><tr><td><code>evidence</code></td><td><code>evidence</code></td><td><code>{ quote, source }</code> or <code>{ title, bars: [{ label, value, shown, colour }] }</code></td></tr><tr><td><code>stops</code></td><td><code>spectrum</code></td><td><code>[{ label, note, colour, badge }]</code> along a line</td></tr><tr><td><code>map</code></td><td><code>map</code></td><td>a Wardley map: <code>{ axis, nodes: [{ id, label, x, y, anchor, highlight }], links: [[a, b]], moves: [{ from, to, label }] }</code></td></tr><tr><td><code>graph</code></td><td><code>graph</code></td><td>a network: <code>{ style, nodes: [{ id, label, x, y, kind, colour }], edges: [{ from, to, label }], groups, path }</code></td></tr><tr><td><code>note</code></td><td>all</td><td>the speaker's notes under the deck</td></tr><tr><td><code>source</code></td><td>all</td><td>where the panel's content comes from</td></tr><tr><td><code>not_a_quote</code></td><td>all</td><td>true when the lines are the storyboard's own words</td></tr></tbody></table></div>
+<p><code>x</code> and node coordinates are 0 to 1 across the panel; a panel is 1600 by 1000 with the floor at 900.</p>
+<h2 id="a-cast">A cast</h2>
+<p><code>{ "what": ..., "characters": [ ... ] }</code>, each character <code>{ id, name, kind, pronouns, role, stands_for, personality, wants, fears, line, look }</code>. <code>kind</code> is <code>human</code> or <code>agent</code>. A human's <code>look</code> is <code>{ skin, hair, hairColour, hatColour, shirt, trousers, accessory, accentColour, height }</code>; an agent's is <code>{ colour }</code>. A character with a <code>gravity</code> (<code>explorer</code>, <code>villager</code>, <code>town-planner</code>) wears its badge by its name.</p>
+<h2 id="a-bundle">A bundle</h2>
+<p><code>{ "storyboard": {...}, "cast": {...}, "packs": ["security"] }</code>: what <code>&lt;sg-storyboard src&gt;</code> fetches.</p>
+<h2 id="the-vocabulary-of-v0-1-0">The vocabulary of v0.1.0</h2>
+<div class="tablewrap"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>kinds</td><td><code>cover</code>, <code>scene</code>, <code>evidence</code>, <code>punchline</code>, <code>spectrum</code>, <code>map</code>, <code>graph</code></td></tr><tr><td>poses</td><td><code>stand</code>, <code>point</code>, <code>wave</code>, <code>arms-up</code>, <code>shrug</code>, <code>think</code>, <code>sit</code></td></tr><tr><td>moods</td><td><code>neutral</code>, <code>happy</code>, <code>excited</code>, <code>calm</code>, <code>worried</code>, <code>sad</code>, <code>surprised</code>, <code>thinking</code>, <code>confused</code>, <code>determined</code></td></tr><tr><td>settings</td><td><code>none</code>, <code>office</code>, <code>interview</code>, <code>street</code>, <code>night</code>, <code>classroom</code></td></tr><tr><td>props</td><td><code>laptop</code>, <code>desk</code>, <code>book</code>, <code>board</code>, <code>phone</code>, <code>sign</code></td></tr><tr><td>props, <code>security</code> pack</td><td><code>key</code>, <code>vault</code>, <code>qr</code>, <code>envelope</code>, <code>record</code>, <code>server</code>, <code>arrow</code>, <code>mark</code>, <code>calendar</code>, <code>terminal</code>, <code>phoneqr</code>, <code>padlock</code></td></tr></tbody></table></div></article>
+</main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a>, the first API site &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.1.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="format.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+</body>
+</html>

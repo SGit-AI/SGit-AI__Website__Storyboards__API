@@ -1,0 +1,4 @@
+/* The two hand-drawn faces the kit writes in, vendored (SIL Open Font License 1.1, the licences beside them), so a page
+   that loads the kit fetches nothing from a third party. Latin subset, from Google Fonts, 20 October 2026. */
+@font-face{font-family:'Caveat';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/caveat-700-latin.woff2) format('woff2')}
+@font-face{font-family:'Patrick Hand';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/patrick-hand-400-latin.woff2) format('woff2')}

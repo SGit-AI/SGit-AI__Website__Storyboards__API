@@ -1,0 +1,27 @@
+# api.storyboards.sgit.ai
+
+> The storyboard kit: draws storyboards (JSON) as sketchy SVG panels in the browser, served in immutable versioned folders. Current release v0.1.0 at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/ (manifest: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json). Site v0.1.0.
+
+Every page has a markdown twin: replace .html with .md.
+
+## Pages
+
+- [Participant disclosure](https://api.storyboards.sgit.ai/about/participant.md)
+- [brief/2026-10-20__storyboards-sgit-ai.html](https://api.storyboards.sgit.ai/brief/2026-10-20__storyboards-sgit-ai.md)
+- [brief/index.html](https://api.storyboards.sgit.ai/brief/index.md)
+- [The format](https://api.storyboards.sgit.ai/docs/format.md)
+- [Documentation](https://api.storyboards.sgit.ai/docs/index.md)
+- [The JavaScript](https://api.storyboards.sgit.ai/docs/javascript.md)
+- [Quick start](https://api.storyboards.sgit.ai/docs/quick-start.md)
+- [Versioning](https://api.storyboards.sgit.ai/docs/versioning.md)
+- [The storyboard kit](https://api.storyboards.sgit.ai/index.md)
+- [releases/index.html](https://api.storyboards.sgit.ai/releases/index.md)
+- [versions/index.html](https://api.storyboards.sgit.ai/versions/index.md)
+
+## Releases
+
+- v0.1.0: https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json
+
+## Where the storyboards are
+
+- https://storyboards.sgit.ai/llms.txt and https://storyboards.sgit.ai/catalogue.json

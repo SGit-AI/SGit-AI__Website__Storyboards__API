@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The JavaScript · api.storyboards.sgit.ai</title>
+<meta name="description" content="The four globals release v0.1.0 defines, and what each function takes and returns.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/docs/javascript.html">
+<link rel="alternate" type="text/markdown" href="javascript.md">
+<meta property="og:title" content="The JavaScript">
+<meta property="og:description" content="The four globals release v0.1.0 defines, and what each function takes and returns.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/docs/javascript.html">
+<meta name="site-version" content="v0.1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../docs/quick-start.html">Quick start</a><a href="../docs/format.html">Format</a><a href="../docs/javascript.html">JavaScript</a><a href="../docs/versioning.html">Versioning</a><a href="../releases/index.html">Releases</a><a href="../brief/index.html">The brief</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.1.0</a> &middot; kit <a href="../v0/v0.1/v0.1.0/manifest.json">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="narrow">
+<article class="article"><h1>The JavaScript</h1><p class="lede">The four globals release v0.1.0 defines, and what each function takes and returns.</p><p>Classic scripts, no build step, no framework, no dependency but Rough.js (vendored). Each file names its own version (<code>VERSION</code>), which is the folder it is served from.</p>
+<h2 id="storyboard-js-storyboardkit">storyboard.js: <code>StoryboardKit</code></h2>
+<p>The drawing, from gen-z-developers.sgit.ai's kit, with four marked patches (<a href="https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json">the manifest</a> says which).</p>
+<div class="tablewrap"><table><thead><tr><th>Function</th><th>Does</th></tr></thead><tbody><tr><td><code>drawScene(svg, scene, cast, { seed, footer })</code></td><td>draws one 1600 by 1000 panel into an <code>&lt;svg&gt;</code></td></tr><tr><td><code>drawCharacter(g, rc, who, x, floor, { pose, mood, flip, scale })</code></td><td>one character, on a Rough.js canvas</td></tr><tr><td><code>wire(root)</code></td><td>wires every <code>.sb-viewer</code>, <code>.sb-deck</code>, <code>.sb-contact</code>, <code>.sb-sheet</code>, <code>.sb-cast</code> and <code>.sbx</code> under <code>root</code>, once each (it runs on load)</td></tr><tr><td><code>play(panel)</code></td><td>plays a panel's arrival: strokes draw themselves, people and bubbles arrive in order</td></tr><tr><td><code>addProps(pack)</code></td><td>adds a prop pack: a function given the drawing primitives that returns <code>{ kind: draw(g, rc, x, y, s, p) }</code></td></tr><tr><td><code>sceneText(scene, cast)</code></td><td>one panel as text, as a DOM node</td></tr><tr><td><code>VOCAB</code></td><td><code>{ kinds, poses, moods, settings, props() }</code></td></tr></tbody></table></div>
+<p>A page may set <code>window.StoryboardPrefsKey</code> before loading the kit, so a reader's viewing preferences (animation, panels per row, text under panels) are kept under that site's own key in their browser.</p>
+<h2 id="props-security-js">props/security.js</h2>
+<p>The security prop pack from pki.sgit.ai: <code>key</code>, <code>vault</code>, <code>qr</code>, <code>envelope</code>, <code>record</code>, <code>server</code>, <code>arrow</code>, <code>mark</code>, <code>calendar</code>, <code>terminal</code>, <code>phoneqr</code>, <code>padlock</code>. Load it before or after <code>storyboard.js</code>.</p>
+<h2 id="formats-js-storyboardformats">formats.js: <code>StoryboardFormats</code></h2>
+<p>No DOM; runs in a browser (a global) and in Node (<code>require</code>).</p>
+<div class="tablewrap"><table><thead><tr><th>Function</th><th>Returns</th></tr></thead><tbody><tr><td><code>validate(storyboard, cast, { props })</code></td><td>a list of problems, empty when the storyboard is good</td></tr><tr><td><code>toMarkdown(storyboard, cast, { url, castHref })</code></td><td>the script, as markdown</td></tr><tr><td><code>toGraph(storyboard, cast, { url, seriesTitle })</code></td><td>the storyboard as a semantic graph: <code>{ nodes, edges }</code>, edges <code>has_panel</code>, <code>next</code>, <code>features</code>, <code>says</code>, <code>thinks</code>, <code>shows</code>, <code>quotes</code>, <code>drawn_from</code>, <code>cites</code>, <code>set_in</code>, <code>part_of</code>, <code>on_shelf</code>, <code>made_by</code></td></tr><tr><td><code>toText(scene, cast)</code></td><td>one panel as one paragraph</td></tr><tr><td><code>stats(storyboard)</code></td><td>panels, kinds, cast, words spoken</td></tr><tr><td><code>VOCAB</code>, <code>PACKS</code></td><td>the vocabulary, and each pack's prop kinds</td></tr></tbody></table></div>
+<h2 id="export-js-storyboardexport">export.js: <code>StoryboardExport</code></h2>
+<p>Needs <code>storyboard.js</code>. Every function returns a promise of a string or a Blob; nothing leaves the browser.</p>
+<div class="tablewrap"><table><thead><tr><th>Function</th><th>Returns</th></tr></thead><tbody><tr><td><code>svg(storyboard, cast, i, { animated, fonts })</code></td><td>one panel as a standalone SVG; <code>fonts</code> is <code>link</code> (default), <code>embed</code> or <code>none</code>; <code>animated</code> adds the drawing animation as CSS inside the file</td></tr><tr><td><code>sheet(storyboard, cast, { cols })</code></td><td>every panel on one SVG</td></tr><tr><td><code>image(storyboard, cast, i, { type, width, quality })</code></td><td>a PNG or JPEG Blob; <code>width: 480</code> makes a thumbnail</td></tr><tr><td><code>download(data, filename, type)</code></td><td>saves it</td></tr></tbody></table></div>
+<h2 id="embed-js-sg-storyboard">embed.js: <code>&lt;sg-storyboard&gt;</code></h2>
+<p>See the <a href="quick-start.html">quick start</a>. <code>window.SgStoryboard.kit(packs)</code> loads the kit into a page without drawing anything.</p>
+<h2 id="headless-tools-render-mjs">Headless: tools/render.mjs</h2>
+<p>Not served; in the <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">repository</a>. The same drawing and the same <code>export.js</code> in Playwright's Chromium, for a site's build: <code>node tools/render.mjs jobs.json</code> writes thumbnails, link previews, SVGs, animated SVGs, PNGs and contact sheets. storyboards.sgit.ai draws its thumbnails with it.</p></article>
+</main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a>, the first API site &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.1.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="javascript.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+</body>
+</html>

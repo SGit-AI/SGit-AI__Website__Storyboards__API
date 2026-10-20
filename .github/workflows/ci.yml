@@ -1,0 +1,78 @@
+# Every commit: syntax, the releases against their manifests (a published byte never moves), a cut that is the same bytes
+# twice, the website, the version bump against main, and the tests in Node and Chromium.
+name: ci
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax of every script, test and tool
+        run: |
+          set -euo pipefail
+          for f in $(git ls-files '*.js' '*.mjs'); do node --check "$f"; done
+          python3 -m py_compile tools/*.py site/*.py
+      - name: Every release matches its manifest, and src/ is the current release
+        run: python3 tools/release.py check
+      - name: A cut is the same bytes twice
+        run: |
+          set -euo pipefail
+          python3 tools/release.py cut --out /tmp/rb/a >/dev/null
+          python3 tools/release.py cut --out /tmp/rb/b >/dev/null
+          diff -r /tmp/rb/a /tmp/rb/b && echo reproducible
+      - name: No published release was changed or removed against main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main || exit 0
+          for m in $(git ls-tree -r --name-only origin/main | grep -E '^v[0-9]+/v[0-9]+\.[0-9]+/v[0-9]+\.[0-9]+\.[0-9]+/manifest.json$' || true); do
+            d=$(dirname "$m")
+            if ! git diff --quiet origin/main -- "$d"; then echo "::error::$d is published on main and was changed: a release is never edited, cut the next one"; exit 1; fi
+          done
+          echo "every release on main is untouched"
+      - name: The version is bumped against main (every change that lands there is a version)
+        if: github.ref != 'refs/heads/main'
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, subprocess, sys
+          t = lambda v: tuple(int(x) for x in v[1:].split("."))
+          here = json.load(open("tools/version.json"))["version"]
+          try:
+              main = json.loads(subprocess.check_output(["git", "show", "origin/main:tools/version.json"], stderr=subprocess.DEVNULL))["version"]
+          except subprocess.CalledProcessError:
+              sys.exit(print(f"{here}: main has no version yet") or 0)
+          if t(here) <= t(main):
+              sys.exit(f"::error::tools/version.json says {here}; main is at {main}: bump it")
+          print(f"{here} is above main's {main}")
+          PY
+      - name: The website in www/ is what site/build.py writes, and it holds together
+        run: python3 site/build.py --check && python3 site/check.py
+      - name: formats.js, in Node
+        run: node tests/test_formats.mjs
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright's Chromium
+        run: npm install --no-save --no-audit --no-fund playwright@1.56.1 && npx playwright install --with-deps chromium
+      - name: The kit, the embed, the exports and SRI, then the website, in Chromium
+        env:
+          CI: '1'
+        run: node tests/test_render.mjs && node tests/test_site.mjs

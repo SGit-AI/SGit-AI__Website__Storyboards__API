@@ -1,0 +1,81 @@
+# main is the release branch: check -> tag the version -> publish api.storyboards.sgit.ai (the website and every release
+# folder, tools/release.py site) -> ask the live host for every hash of every release.
+name: deploy-pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: |
+          set -euo pipefail
+          for f in $(git ls-files '*.js' '*.mjs'); do node --check "$f"; done
+          python3 tools/release.py check
+          python3 site/build.py --check
+          python3 site/check.py
+          node tests/test_formats.mjs
+  tag:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [check]
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Tag this version (tools/version.json); refuse one that is already the tag of another commit
+        run: |
+          set -euo pipefail
+          TAG=$(python3 -c 'import json;print(json.load(open("tools/version.json"))["version"])')
+          git fetch --tags --quiet
+          if git rev-parse -q --verify "refs/tags/$TAG" >/dev/null; then
+            if [ "$(git rev-parse "refs/tags/$TAG^{commit}")" = "$(git rev-parse HEAD)" ]; then echo "$TAG already tagged here"; exit 0; fi
+            echo "::error::$TAG is already the tag of another commit: bump tools/version.json"; exit 1
+          fi
+          git config user.name 'GitHub Actions'; git config user.email 'actions@github.com'
+          git tag "$TAG" HEAD && git push origin "refs/tags/$TAG" && echo "tagged $TAG"
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [check]
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Assemble the site, www/ and every release folder
+        run: python3 tools/release.py site --out /tmp/site && ls /tmp/site
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: /tmp/site
+      - id: deployment
+        uses: actions/deploy-pages@v4
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [deploy]
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: The live host serves every file of every release with the hash in its manifest
+        run: python3 tools/live_check.py --wait 480

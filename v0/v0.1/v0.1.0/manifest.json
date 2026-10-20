@@ -1,0 +1,99 @@
+{
+ "what": "A release of the storyboard kit, served at https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/<path>. Immutable: these bytes never change at this path. Put a file's 'integrity' in the integrity attribute of the tag that loads it, with crossorigin=\"anonymous\".",
+ "release": "v0.1.0",
+ "date": "2026-10-20",
+ "base": "https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/",
+ "counts": {
+  "files": 13,
+  "bytes": 233785
+ },
+ "files": [
+  {
+   "path": "embed.js",
+   "bytes": 6618,
+   "sha256": "849cd79b2ef346f90a27e476189a0d7d067d13ddfd9653436bdc9d62afee4d3b",
+   "integrity": "sha384-MJYywdRM1gslaDV4AypUBYskTgX6Tc46P6B5aakMDBi/xb2hytOzWCsT6G09oc2q"
+  },
+  {
+   "path": "export.js",
+   "bytes": 6977,
+   "sha256": "f49a784f692499b8455eec40fca632119ee26ced24e65de3f04b16b806fabe15",
+   "integrity": "sha384-AZlBi+8U84fchjU5NkLWax6WlMqeEdfDT8jW+Rkjr7MYfrYxE9qfvToj6ekYas4M"
+  },
+  {
+   "path": "fonts.css",
+   "bytes": 522,
+   "sha256": "aa1cef498940e9c96ce0ded13f23fbe12c8ad4a8dcf3d7ac91c2a4805fb79361",
+   "integrity": "sha384-ep4bdPYRUzquMICQMhuOkSZ/CB1FnMh6qnGWS1F74VepoLOlw9JGK+Zg+E6/t9dD"
+  },
+  {
+   "path": "fonts/OFL-Caveat.txt",
+   "bytes": 4385,
+   "sha256": "1f9d81d094273d82f3898a1ee8b598a717d050ecbf5ff7bede105b704880157b",
+   "integrity": "sha384-l911Hl/fkgplR26WC6KkNITbNcldYNd6Lp89nmBEeGVPeLwZ40DO6XZRS8wm/lIH",
+   "origin": "the Caveat licence, from github.com/google/fonts"
+  },
+  {
+   "path": "fonts/OFL-PatrickHand.txt",
+   "bytes": 4376,
+   "sha256": "377f4f9c19e935228552478eb68cc2ed82910988a60ba60e2ac73b09f32d02d1",
+   "integrity": "sha384-dMIp2Y7W7PbACj2X+bb0NzCO5XLzTAXh+/jlXgwpk7OijCq8nENmZ6BgPobOn53I",
+   "origin": "the Patrick Hand licence, from github.com/google/fonts"
+  },
+  {
+   "path": "fonts/caveat-700-latin.woff2",
+   "bytes": 51020,
+   "sha256": "15f9638095ad5ec9816f93d66805ca1a87e71dc5a76b596bfce1c78d4704c405",
+   "integrity": "sha384-8ZKDDsekt9CcGNgtdGoqomV68jhKA8BORM8BbX+D2rHHCC7l7YQuMNyhvlOZyIA+",
+   "origin": "Caveat 700, latin subset, Google Fonts (v23), SIL OFL 1.1"
+  },
+  {
+   "path": "fonts/patrick-hand-400-latin.woff2",
+   "bytes": 23944,
+   "sha256": "ac5bc9033b2572bf84d39f7150c1634e37ed16e8dbee632d6d0bceac0bbf0199",
+   "integrity": "sha384-eczLNWFwBaxVkuybbtqmTtq8ZoJxblCL5J3AOZHw64SvR5seJ/kYlVHpuyZovZAl",
+   "origin": "Patrick Hand 400, latin subset, Google Fonts (v25), SIL OFL 1.1"
+  },
+  {
+   "path": "formats.js",
+   "bytes": 11494,
+   "sha256": "1e8f89a4dc4a6ec013984d8ff101f552dae8bb1b12959fb17511ff1269e7f3a7",
+   "integrity": "sha384-5+Nd7LBeUw3ULihUHo2pdWbGrMYeK6K1o++7A5QBRyPhCIFNJ4xqjp7ULIfgz8IX"
+  },
+  {
+   "path": "props/security.js",
+   "bytes": 11483,
+   "sha256": "bd58ffd4885eeb079d5611797a106847327a4fdcadf858417b2f213f0b77862a",
+   "integrity": "sha384-IkxAFhrp5pQhBSjFCLMEA+1iqFHJ6xPRLeO2n9g478h7Z8hW9cUyvza3PuOtmsOx",
+   "origin": "pki.sgit.ai assets/storyboard/pki-props.js, SGit-AI/SGit-AI__Website__PKI commit ab6affc9348ae390636405d2dd24b5db31a9663c, with one marked API PATCH: it registers as a prop pack"
+  },
+  {
+   "path": "storyboard.css",
+   "bytes": 15822,
+   "sha256": "6d8c968a1c3ba7f384aea9b05d443c18dbf3385927ba003e43ed18f8893cf59d",
+   "integrity": "sha384-NGJqtVi+93pE7lBuwFU0RQWhqnQVLR33Wp8AYH1iAeyC2A7h2ijgU4bEKF5HIKIf",
+   "origin": "gen-z-developers.sgit.ai assets/storyboard.css, commit e2a71808, unchanged (sha256 6d8c968a1c3ba7f384aea9b05d443c18dbf3385927ba003e43ed18f8893cf59d)"
+  },
+  {
+   "path": "storyboard.js",
+   "bytes": 68150,
+   "sha256": "7465946c3a7fa73984c3f969e7745b2e77692791eeb5fd1a755556dba05cabcd",
+   "integrity": "sha384-3xZhCe5dUdBXMwV57gyscmlqdIjzz9L6huUkcuiEyC0V3jfrlQEdyEhvvF4kCeOa",
+   "origin": "gen-z-developers.sgit.ai assets/storyboard.js, SGit-AI/SGit-AI__Website__Gen-Z-Developers commit e2a71808f2dbdc9d94167b9493b539f0c567b35c (sha256 86212ff563e0bb0289abe2f6e2f405670087a0ef29b0cdd11c3d9adce36aaf67, the same bytes pki.sgit.ai vendored), with four marked API PATCHes: prop packs (pki.sgit.ai's patch, generalised), the preferences key, the vocabulary/version/wire(), and an embed's start view"
+  },
+  {
+   "path": "vendor/rough-4.6.6.LICENSE.txt",
+   "bytes": 1068,
+   "sha256": "dca9a392272606ac748ac0976a2a1133f14eef841c27beaa51a844d53c56a09d",
+   "integrity": "sha384-QZ87aOxxFPPgpOKJaDoWOxJu8ldVZEwC15c2Z9J+P4m3txLfHZuOtBEB2keNHDSk",
+   "origin": "Rough.js licence (MIT)"
+  },
+  {
+   "path": "vendor/rough-4.6.6.js",
+   "bytes": 27926,
+   "sha256": "8589b8664aecfa7631d828dcaa731e2c686892eb5d842d6c147c790f21e16ae9",
+   "integrity": "sha384-XPr5sCJfqHMzoJ8Cn1UYdXXD+XvRi0yoZm3W0yVJ24QP0ps8SYUskiXqnl4yqWlc",
+   "origin": "Rough.js 4.6.6 (MIT), as vendored by gen-z-developers.sgit.ai, unchanged (sha256 8589b8664aecfa7631d828dcaa731e2c686892eb5d842d6c147c790f21e16ae9)"
+  }
+ ]
+}

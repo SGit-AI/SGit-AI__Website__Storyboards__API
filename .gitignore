@@ -167,7 +167,7 @@ venv.bak/
 .ropeproject
 
 # mkdocs/Zensical documentation
-/site
+# /site (mkdocs output in the template): this repository's site/ is source
 
 # mypy
 .mypy_cache/

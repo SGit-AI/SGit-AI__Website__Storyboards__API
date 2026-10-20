@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quick start · api.storyboards.sgit.ai</title>
+<meta name="description" content="Draw a storyboard on any page, with the embed or with the kit&#x27;s files loaded by hand.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/docs/quick-start.html">
+<link rel="alternate" type="text/markdown" href="quick-start.md">
+<meta property="og:title" content="Quick start">
+<meta property="og:description" content="Draw a storyboard on any page, with the embed or with the kit&#x27;s files loaded by hand.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/docs/quick-start.html">
+<meta name="site-version" content="v0.1.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../docs/quick-start.html">Quick start</a><a href="../docs/format.html">Format</a><a href="../docs/javascript.html">JavaScript</a><a href="../docs/versioning.html">Versioning</a><a href="../releases/index.html">Releases</a><a href="../brief/index.html">The brief</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.1.0</a> &middot; kit <a href="../v0/v0.1/v0.1.0/manifest.json">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="narrow">
+<article class="article"><h1>Quick start</h1><p class="lede">Draw a storyboard on any page, with the embed or with the kit&#x27;s files loaded by hand.</p><h2 id="the-embed">The embed</h2>
+<pre><code class="lang-html">&lt;script src=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/embed.js&quot; defer&gt;&lt;/script&gt;
+&lt;sg-storyboard src=&quot;https://storyboards.sgit.ai/gen-z-developers/the-opening/bundle.json&quot; view=&quot;deck&quot;&gt;&lt;/sg-storyboard&gt;</code></pre>
+<p><code>embed.js</code> loads the rest of release v0.1.0 from beside itself, once per page: <code>fonts.css</code>, <code>storyboard.css</code>, <code>vendor/rough-4.6.6.js</code>, any prop pack the bundle names, then <code>storyboard.js</code>. Attributes:</p>
+<div class="tablewrap"><table><thead><tr><th>Attribute</th><th>Means</th><th>Default</th></tr></thead><tbody><tr><td><code>src</code></td><td>a bundle: <code>{ "storyboard": ..., "cast": ..., "packs": [...] }</code></td><td></td></tr><tr><td><code>storyboard</code>, <code>cast</code></td><td>two URLs instead of a bundle</td><td></td></tr><tr><td><code>view</code></td><td><code>deck</code>, <code>grid</code>, <code>script</code>, or <code>panel</code> (one still panel)</td><td><code>deck</code></td></tr><tr><td><code>panel</code></td><td>with <code>view="panel"</code>, which panel, from 1</td><td><code>1</code></td></tr><tr><td><code>packs</code></td><td>extra prop packs, comma separated: today <code>security</code></td><td>the bundle's</td></tr></tbody></table></div>
+<p>The JSON can be served from any host that sends <code>access-control-allow-origin</code> (GitHub Pages does, for every file).</p>
+<h2 id="the-files-by-hand-with-integrity">The files by hand, with integrity</h2>
+<p>For a page that wants the browser to refuse any byte that is not the release's, load the files with the <code>integrity</code> strings from the <a href="https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/manifest.json">manifest</a>. This is what storyboards.sgit.ai does on every page:</p>
+<pre><code class="lang-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/fonts.css&quot; integrity=&quot;sha384-ep4bdPYRUzquMICQMhuOkSZ/CB1FnMh6qnGWS1F74VepoLOlw9JGK+Zg+E6/t9dD&quot; crossorigin=&quot;anonymous&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/storyboard.css&quot; integrity=&quot;sha384-NGJqtVi+93pE7lBuwFU0RQWhqnQVLR33Wp8AYH1iAeyC2A7h2ijgU4bEKF5HIKIf&quot; crossorigin=&quot;anonymous&quot;&gt;
+&lt;script src=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/vendor/rough-4.6.6.js&quot; integrity=&quot;sha384-XPr5sCJfqHMzoJ8Cn1UYdXXD+XvRi0yoZm3W0yVJ24QP0ps8SYUskiXqnl4yqWlc&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/props/security.js&quot; integrity=&quot;sha384-IkxAFhrp5pQhBSjFCLMEA+1iqFHJ6xPRLeO2n9g478h7Z8hW9cUyvza3PuOtmsOx&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/storyboard.js&quot; integrity=&quot;sha384-3xZhCe5dUdBXMwV57gyscmlqdIjzz9L6huUkcuiEyC0V3jfrlQEdyEhvvF4kCeOa&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/export.js&quot; integrity=&quot;sha384-AZlBi+8U84fchjU5NkLWax6WlMqeEdfDT8jW+Rkjr7MYfrYxE9qfvToj6ekYas4M&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code></pre>
+<p>Then the page's own markup: a <code>.sb-viewer</code> holding the toolbar, <code>.sb-deck</code>, <code>.sb-grid</code>, <code>.sb-script</code> and a <code>&lt;script type="application/json" class="sb-data"&gt;</code> with <code>{ "storyboard", "cast" }</code>. The kit wires every such element on the page when it loads (<code>StoryboardKit.wire(root)</code> does it again for markup added later). The simplest copy to start from is any storyboard page on storyboards.sgit.ai: view its source.</p>
+<h2 id="draw-one-panel-yourself">Draw one panel yourself</h2>
+<pre><code class="lang-js">const svg = document.querySelector(&#x27;svg&#x27;);
+StoryboardKit.drawScene(svg, storyboard.scenes[0], cast, { seed: 11 });</code></pre>
+<p>Seeds make the wobble repeatable: the same panel with the same seed is the same picture on every load. The deck uses <code>11 + panel index</code>, and so do the exports.</p></article>
+</main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a>, the first API site &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.1.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="quick-start.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+</body>
+</html>

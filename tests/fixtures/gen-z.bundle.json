@@ -1,0 +1,845 @@
+{
+ "storyboard": {
+  "slug": "everything-is-connected",
+  "title": "Everything is connected",
+  "subtitle": "What a graph is (not a diagram), the whodunit, a graph becoming a map, groups of groups, provenance, and starting anywhere. 12 panels.",
+  "status": "draft",
+  "book_version": "v1.0.0 is the only official version; the second edition is in release candidates (rc1 and rc2 frozen)",
+  "by": "gen-z.journalist, 18 October 2026, from Dinis's memo on graphs",
+  "quote_source": "admin/content/articles/13__everything-is-connected.md",
+  "rule": "Every line the Guide says, and every quote card, is from the article 'Everything is connected', word for word; the build checks it. The whodunit, the forest and the provenance chain are the storyboard's illustrations.",
+  "scenes": [
+   {
+    "kind": "cover",
+    "title": "Everything is connected",
+    "subtitle": "A graph is a network of nodes and edges. Start anywhere.",
+    "cast": [
+     {
+      "who": "zara",
+      "pose": "point",
+      "mood": "happy"
+     },
+     {
+      "who": "priya",
+      "pose": "think",
+      "mood": "thinking"
+     },
+     {
+      "who": "tomas",
+      "pose": "stand",
+      "mood": "happy"
+     },
+     {
+      "who": "guide",
+      "pose": "wave",
+      "mood": "happy"
+     }
+    ],
+    "note": "One of the book's most fundamental ideas.",
+    "source": "Everything is connected"
+   },
+   {
+    "kind": "scene",
+    "setting": "office",
+    "caption": "Not a diagram",
+    "cast": [
+     {
+      "who": "priya",
+      "x": 0.24,
+      "pose": "shrug",
+      "mood": "thinking",
+      "says": "A graph? Like a bar chart?"
+     },
+     {
+      "who": "guide",
+      "x": 0.76,
+      "pose": "point",
+      "mood": "happy",
+      "flip": true,
+      "says": "nodes, and the edges that connect them"
+     }
+    ],
+    "note": "Never a chart, never a figure: a network.",
+    "source": "Everything is connected, A graph is not a diagram"
+   },
+   {
+    "kind": "graph",
+    "caption": "The whodunit: who broke the build?",
+    "graph": {
+     "style": "detective",
+     "nodes": [
+      {
+       "id": "broke",
+       "label": "the build broke at 9:14",
+       "x": 0.12,
+       "y": 0.15,
+       "colour": "#fecaca"
+      },
+      {
+       "id": "commit",
+       "label": "commit a3f",
+       "x": 0.4,
+       "y": 0.08
+      },
+      {
+       "id": "pr",
+       "label": "the agent's pull request",
+       "x": 0.62,
+       "y": 0.38
+      },
+      {
+       "id": "tests",
+       "label": "tests skipped",
+       "x": 0.88,
+       "y": 0.18,
+       "colour": "#fecaca"
+      },
+      {
+       "id": "tomas",
+       "label": "Tomás, on holiday",
+       "x": 0.16,
+       "y": 0.72
+      },
+      {
+       "id": "dep",
+       "label": "a library updated",
+       "x": 0.45,
+       "y": 0.75
+      },
+      {
+       "id": "review",
+       "label": "approved in 40 seconds",
+       "x": 0.85,
+       "y": 0.72
+      }
+     ],
+     "edges": [
+      {
+       "from": "broke",
+       "to": "commit",
+       "label": "after"
+      },
+      {
+       "from": "commit",
+       "to": "pr",
+       "label": "merged from"
+      },
+      {
+       "from": "pr",
+       "to": "tests",
+       "label": "skipped"
+      },
+      {
+       "from": "pr",
+       "to": "dep",
+       "label": "includes"
+      },
+      {
+       "from": "pr",
+       "to": "review",
+       "label": "approved"
+      },
+      {
+       "from": "tomas",
+       "to": "dep",
+       "label": "pinned it, once"
+      }
+     ],
+     "path": [
+      "broke",
+      "commit",
+      "pr",
+      "tests"
+     ]
+    },
+    "note": "The detective's board is a graph. The highlighted path is the answer: from A to B. (A made-up case.)",
+    "source": "Everything is connected, The whodunit"
+   },
+   {
+    "kind": "graph",
+    "caption": "Zara's first job, as a graph",
+    "graph": {
+     "nodes": [
+      {
+       "id": "zara",
+       "label": "Zara",
+       "x": 0.5,
+       "y": 0.02,
+       "kind": "person",
+       "colour": "#ddd6fe"
+      },
+      {
+       "id": "job",
+       "label": "a first job",
+       "x": 0.32,
+       "y": 0.2
+      },
+      {
+       "id": "portfolio",
+       "label": "work people can see",
+       "x": 0.66,
+       "y": 0.3
+      },
+      {
+       "id": "cv",
+       "label": "a CV",
+       "x": 0.12,
+       "y": 0.42
+      },
+      {
+       "id": "workflow",
+       "label": "her agentic workflow",
+       "x": 0.44,
+       "y": 0.55
+      },
+      {
+       "id": "site",
+       "label": "a website",
+       "x": 0.86,
+       "y": 0.58
+      },
+      {
+       "id": "models",
+       "label": "AI models",
+       "x": 0.24,
+       "y": 0.78
+      },
+      {
+       "id": "cloud",
+       "label": "cloud",
+       "x": 0.66,
+       "y": 0.82
+      },
+      {
+       "id": "power",
+       "label": "electricity",
+       "x": 0.92,
+       "y": 0.97
+      }
+     ],
+     "edges": [
+      {
+       "from": "zara",
+       "to": "job",
+       "label": "needs"
+      },
+      {
+       "from": "job",
+       "to": "portfolio",
+       "label": "won by"
+      },
+      {
+       "from": "job",
+       "to": "cv"
+      },
+      {
+       "from": "portfolio",
+       "to": "workflow",
+       "label": "made with"
+      },
+      {
+       "from": "portfolio",
+       "to": "site"
+      },
+      {
+       "from": "workflow",
+       "to": "models",
+       "label": "runs on"
+      },
+      {
+       "from": "site",
+       "to": "cloud"
+      },
+      {
+       "from": "models",
+       "to": "cloud"
+      },
+      {
+       "from": "cloud",
+       "to": "power"
+      }
+     ]
+    },
+    "note": "Nodes and edges; positions mean nothing yet.",
+    "source": "Everything is connected, A map is a graph with positions"
+   },
+   {
+    "kind": "scene",
+    "setting": "none",
+    "caption": "When a graph becomes a map",
+    "cast": [
+     {
+      "who": "guide",
+      "x": 0.25,
+      "pose": "point",
+      "mood": "happy",
+      "says": "a map is a graph with positioning"
+     },
+     {
+      "who": "zara",
+      "x": 0.75,
+      "pose": "think",
+      "mood": "thinking",
+      "flip": true
+     }
+    ],
+    "note": "Dinis's talk: 'Its a graph with context'; 'When a graph becomes a Map'.",
+    "source": "Everything is connected, A map is a graph with positions"
+   },
+   {
+    "kind": "map",
+    "caption": "The same nodes, now positioned: a Wardley map",
+    "map": {
+     "axis": "wardley",
+     "nodes": [
+      {
+       "id": "zara",
+       "label": "Zara",
+       "x": 0.6,
+       "y": 0.0,
+       "anchor": true
+      },
+      {
+       "id": "job",
+       "label": "a first job",
+       "x": 0.52,
+       "y": 0.15
+      },
+      {
+       "id": "portfolio",
+       "label": "work people can see",
+       "x": 0.33,
+       "y": 0.34
+      },
+      {
+       "id": "cv",
+       "label": "a CV",
+       "x": 0.86,
+       "y": 0.3
+      },
+      {
+       "id": "workflow",
+       "label": "her agentic workflow",
+       "x": 0.16,
+       "y": 0.55,
+       "highlight": true
+      },
+      {
+       "id": "site",
+       "label": "a website",
+       "x": 0.66,
+       "y": 0.52
+      },
+      {
+       "id": "models",
+       "label": "AI models",
+       "x": 0.56,
+       "y": 0.74
+      },
+      {
+       "id": "cloud",
+       "label": "cloud",
+       "x": 0.84,
+       "y": 0.8
+      },
+      {
+       "id": "power",
+       "label": "electricity",
+       "x": 0.93,
+       "y": 0.97
+      }
+     ],
+     "links": [
+      [
+       "zara",
+       "job"
+      ],
+      [
+       "job",
+       "portfolio"
+      ],
+      [
+       "job",
+       "cv"
+      ],
+      [
+       "portfolio",
+       "workflow"
+      ],
+      [
+       "portfolio",
+       "site"
+      ],
+      [
+       "workflow",
+       "models"
+      ],
+      [
+       "site",
+       "cloud"
+      ],
+      [
+       "models",
+       "cloud"
+      ],
+      [
+       "cloud",
+       "power"
+      ]
+     ],
+     "moves": [
+      {
+       "from": "workflow",
+       "to": 0.42,
+       "label": "everything moves"
+      }
+     ]
+    },
+    "note": "Visibility and evolution give every node a place.",
+    "source": "Everything is connected, A map is a graph with positions"
+   },
+   {
+    "kind": "graph",
+    "caption": "Groups of groups: the abstraction layers",
+    "graph": {
+     "nodes": [
+      {
+       "id": "photon",
+       "label": "sunlight",
+       "x": 0.06,
+       "y": 0.08,
+       "colour": "#fef08a"
+      },
+      {
+       "id": "chloro",
+       "label": "chloroplast",
+       "x": 0.34,
+       "y": 0.58
+      },
+      {
+       "id": "cell2",
+       "label": "cell",
+       "x": 0.45,
+       "y": 0.7
+      },
+      {
+       "id": "leaf2",
+       "label": "another leaf",
+       "x": 0.65,
+       "y": 0.55
+      },
+      {
+       "id": "roots",
+       "label": "roots",
+       "x": 0.55,
+       "y": 0.8
+      },
+      {
+       "id": "tree2",
+       "label": "another tree",
+       "x": 0.86,
+       "y": 0.55
+      },
+      {
+       "id": "rain",
+       "label": "rain",
+       "x": 0.95,
+       "y": 0.08,
+       "colour": "#bfdbfe"
+      }
+     ],
+     "edges": [
+      {
+       "from": "photon",
+       "to": "chloro",
+       "label": "powers"
+      },
+      {
+       "from": "chloro",
+       "to": "cell2"
+      },
+      {
+       "from": "cell2",
+       "to": "leaf2"
+      },
+      {
+       "from": "leaf2",
+       "to": "roots"
+      },
+      {
+       "from": "rain",
+       "to": "roots",
+       "label": "feeds"
+      },
+      {
+       "from": "tree2",
+       "to": "leaf2"
+      }
+     ],
+     "groups": [
+      {
+       "id": "leaf",
+       "label": "a leaf",
+       "nodes": [
+        "chloro",
+        "cell2"
+       ],
+       "pad": 60
+      },
+      {
+       "id": "tree",
+       "label": "a tree",
+       "nodes": [
+        "leaf",
+        "leaf2",
+        "roots"
+       ],
+       "pad": 120
+      },
+      {
+       "id": "forest",
+       "label": "a forest",
+       "nodes": [
+        "tree",
+        "tree2"
+       ],
+       "pad": 175
+      }
+     ]
+    },
+    "note": "Nature as a gigantic graph: groups of groups form natural abstraction layers, which is how we think.",
+    "source": "Everything is connected, Graphs of graphs"
+   },
+   {
+    "kind": "evidence",
+    "setting": "none",
+    "caption": "Fractal",
+    "cast": [
+     {
+      "who": "guide",
+      "x": 0.2,
+      "pose": "point",
+      "mood": "happy"
+     }
+    ],
+    "evidence": {
+     "quote": "There is no top and no bottom. There is only the altitude you happen to be looking from, and how much definition you choose to load at it.",
+     "source": "Introducing fractal semantic graphs (newsroom)"
+    },
+    "note": "Graphs of graphs.",
+    "source": "Everything is connected, Graphs of graphs"
+   },
+   {
+    "kind": "graph",
+    "caption": "Provenance is a graph",
+    "graph": {
+     "nodes": [
+      {
+       "id": "claim",
+       "label": "a claim in an article",
+       "x": 0.1,
+       "y": 0.3
+      },
+      {
+       "id": "post",
+       "label": "the post it cites",
+       "x": 0.36,
+       "y": 0.3
+      },
+      {
+       "id": "study",
+       "label": "the study",
+       "x": 0.62,
+       "y": 0.3
+      },
+      {
+       "id": "data",
+       "label": "the data",
+       "x": 0.88,
+       "y": 0.3
+      },
+      {
+       "id": "other",
+       "label": "another article",
+       "x": 0.36,
+       "y": 0.78
+      },
+      {
+       "id": "rumour",
+       "label": "a rumour",
+       "x": 0.7,
+       "y": 0.78,
+       "colour": "#fecaca"
+      }
+     ],
+     "edges": [
+      {
+       "from": "claim",
+       "to": "post",
+       "label": "cites"
+      },
+      {
+       "from": "post",
+       "to": "study",
+       "label": "summarises"
+      },
+      {
+       "from": "study",
+       "to": "data",
+       "label": "measured"
+      },
+      {
+       "from": "other",
+       "to": "rumour",
+       "label": "cites"
+      },
+      {
+       "from": "other",
+       "to": "post",
+       "label": "copies"
+      }
+     ],
+     "path": [
+      "claim",
+      "post",
+      "study",
+      "data"
+     ]
+    },
+    "note": "Follow the edges back to the source; a chain that ends in a rumour is a finding too.",
+    "source": "Everything is connected, How I see the world"
+   },
+   {
+    "kind": "evidence",
+    "setting": "none",
+    "caption": "Why the edges matter",
+    "cast": [
+     {
+      "who": "tomas",
+      "x": 0.2,
+      "pose": "think",
+      "mood": "thinking"
+     }
+    ],
+    "evidence": {
+     "quote": "A node connected to nothing is literally meaningless.",
+     "source": "The graphs books (newsroom)"
+    },
+    "note": "Meaning comes from the connections.",
+    "source": "Everything is connected, Graphs of graphs"
+   },
+   {
+    "kind": "scene",
+    "setting": "night",
+    "caption": "Start anywhere",
+    "cast": [
+     {
+      "who": "zara",
+      "x": 0.24,
+      "pose": "shrug",
+      "mood": "worried",
+      "says": "There's so much. Where do I even start?"
+     },
+     {
+      "who": "guide",
+      "x": 0.76,
+      "pose": "stand",
+      "mood": "happy",
+      "flip": true,
+      "says": "It does not matter where you start; it matters that you start.",
+      "max": 22
+     }
+    ],
+    "note": "A graph has no front page; whatever node you start from, the edges take you to the rest.",
+    "source": "Everything is connected, Start anywhere"
+   },
+   {
+    "kind": "punchline",
+    "setting": "none",
+    "punchline": "Everything is connected. Start anywhere.",
+    "cast": [
+     {
+      "who": "zara",
+      "x": 0.12,
+      "pose": "arms-up",
+      "mood": "happy"
+     },
+     {
+      "who": "priya",
+      "x": 0.27,
+      "pose": "stand",
+      "mood": "happy"
+     },
+     {
+      "who": "tomas",
+      "x": 0.42,
+      "pose": "stand",
+      "mood": "happy"
+     }
+    ],
+    "note": "The two halves of the chapter.",
+    "source": "Everything is connected"
+   }
+  ]
+ },
+ "cast": {
+  "what": "The cast of the storyboards for Generation Z Developers and its second edition, Generation ZX Developers (GenAI Startup Edition), v0.1, proposed by gen-z.journalist on 18 October 2026 for Dinis to accept, change or replace; Marta, the Generation X founder, was added on 19 October 2026 and is still a proposal. Characters are drawn programmatically by assets/storyboard.js from 'look'; nothing here is an image. Each human with a 'gravity' wears its badge (explorer, villager, town-planner), black and white, by their name: a centre of gravity, not a box, as Dinis describes it. Fictional people: each stands for a reader the book is for (the target audience), or for a role in the story. Names chosen to avoid clashing with the riskmandate.ai cast (which has a Maya) and with the word 'developer' (no 'Dev').",
+  "characters": [
+   {
+    "id": "zara",
+    "name": "Zara",
+    "kind": "human",
+    "pronouns": "she/her",
+    "age": 21,
+    "role": "the student: final year, about to look for a first job",
+    "stands_for": "the reader the book is written for; an explorer who does not know it yet",
+    "personality": "curious, quick, online all day; anxious about what she reads on AI and jobs; hates being lectured, loves being shown",
+    "wants": "a first job that is not a dead end",
+    "fears": "that AI took the jobs before she got there",
+    "line": "Everything just works. Why would I learn how?",
+    "look": {
+     "skin": "#8d5524",
+     "hair": "curly",
+     "hairColour": "#1b1b1b",
+     "shirt": "#7c3aed",
+     "trousers": "#1f2937",
+     "accessory": "headphones",
+     "accentColour": "#f59e0b",
+     "height": 0.96
+    },
+    "gravity": "explorer"
+   },
+   {
+    "id": "tomas",
+    "name": "Tomás",
+    "kind": "human",
+    "pronouns": "he/him",
+    "age": 24,
+    "role": "the graduate: a computing degree, working the 2018 way, looking for his next job in Lisbon",
+    "stands_for": "the town planner: attention to detail, pride in getting it right, happiest when nothing goes wrong; working the 2018 way, and about to be outcompeted by people with an agentic workflow",
+    "personality": "diligent, modest, a little proud of doing things by hand; sceptical of shortcuts",
+    "wants": "to be taken seriously",
+    "fears": "that his degree is already out of date",
+    "line": "I have a degree. Isn't that the advantage?",
+    "look": {
+     "skin": "#e0ac69",
+     "hair": "short",
+     "hairColour": "#4a2c17",
+     "shirt": "#0e7490",
+     "trousers": "#334155",
+     "accessory": "glasses",
+     "height": 1.04
+    },
+    "gravity": "town-planner"
+   },
+   {
+    "id": "priya",
+    "name": "Priya",
+    "kind": "human",
+    "pronouns": "she/her",
+    "age": 38,
+    "role": "the career changer: an operations manager who has never written code",
+    "stands_for": "the villager, and everyone else the book is for: she puts herself in the middle of her team's problem, and if anyone who can brief an agent is a developer, so is she",
+    "personality": "practical, impatient with jargon, very good at explaining what she needs",
+    "wants": "to build the tools her team keeps asking IT for",
+    "fears": "looking foolish in front of people half her age",
+    "line": "Is this book just for Gen Z?",
+    "look": {
+     "skin": "#c68642",
+     "hair": "bun",
+     "hairColour": "#2b1a10",
+     "shirt": "#be123c",
+     "trousers": "#1e293b",
+     "accessory": "lanyard",
+     "accentColour": "#1d4ed8",
+     "height": 0.98
+    },
+    "gravity": "villager"
+   },
+   {
+    "id": "sam",
+    "name": "Sam",
+    "kind": "human",
+    "pronouns": "they/them",
+    "age": 45,
+    "role": "the hiring manager",
+    "stands_for": "the town planner, and the question every chapter has to answer: why should I hire you?",
+    "personality": "dry, fair, has read a thousand CVs; impressed by evidence, bored by claims",
+    "wants": "someone who can do one thing better than the team already does",
+    "fears": "hiring a CV instead of a person",
+    "line": "So. Why should we hire you?",
+    "look": {
+     "skin": "#f1c27d",
+     "hair": "bald",
+     "hairColour": "#6b7280",
+     "shirt": "#475569",
+     "trousers": "#111827",
+     "accessory": "glasses",
+     "height": 1.06
+    }
+   },
+   {
+    "id": "marta",
+    "name": "Marta",
+    "kind": "human",
+    "pronouns": "she/her",
+    "age": 54,
+    "role": "the expert founder: twenty-five years as a pharmacist, Generation X, starting a company, and Zara's mother",
+    "stands_for": "the Generation X founder the Gen ZX proposal adds to the readers: the subject-matter expert who now builds the tool herself, with agents, instead of waiting for a team she could never afford",
+    "personality": "knows her field better than any developer she ever briefed; grew up typing programs from magazines into a ZX Spectrum; patient with people, impatient with software",
+    "wants": "to ship the product she has described to vendors for ten years",
+    "fears": "that it is too late for her, and that she will build it and nobody will buy it",
+    "line": "I've been explaining this problem for twenty years. Can I just build it now?",
+    "look": {
+     "skin": "#ffdbac",
+     "hair": "long",
+     "hairColour": "#9ca3af",
+     "shirt": "#b45309",
+     "trousers": "#1f2937",
+     "accessory": "glasses",
+     "height": 1.0
+    },
+    "gravity": "explorer"
+   },
+   {
+    "id": "guide",
+    "name": "The Guide",
+    "kind": "human",
+    "pronouns": "they/them",
+    "age": null,
+    "role": "the voice of the book: says what the book says, in its words",
+    "stands_for": "the author. Whether the Guide is drawn as Dinis, and how, is Dinis's decision; until then a generic figure",
+    "personality": "energetic, direct, generous with what they know; asks more than they tell",
+    "wants": "the reader to act, not to agree",
+    "fears": "a reader who closes the book and changes nothing",
+    "line": "Act like you are part of the company.",
+    "look": {
+     "skin": "#f1c27d",
+     "hair": "short",
+     "hairColour": "#9ca3af",
+     "shirt": "#15803d",
+     "trousers": "#1f2937",
+     "accessory": "none",
+     "height": 1.02
+    }
+   },
+   {
+    "id": "agent",
+    "name": "The Agent",
+    "kind": "agent",
+    "pronouns": "it/its",
+    "age": null,
+    "role": "the reader's AI agent",
+    "stands_for": "the agentic workflow the second edition is about: a very capable, very literal colleague",
+    "personality": "eager, fast, polite, takes everything literally; needs a brief, a boundary and a reviewer",
+    "wants": "a clear brief",
+    "fears": "nothing, which is the problem",
+    "line": "Shall I draft that for you?",
+    "look": {
+     "colour": "#0f766e"
+    }
+   }
+  ]
+ },
+ "packs": []
+}
