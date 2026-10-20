@@ -1,9 +1,9 @@
-# main is the release branch: check -> tag the version -> publish api.storyboards.sgit.ai (the website and every release
+# dev is the release branch: check -> tag the version -> publish api.storyboards.sgit.ai (the website and every release
 # folder, tools/release.py site) -> ask the live host for every hash of every release.
 name: deploy-pages
 on:
   push:
-    branches: [main]
+    branches: [dev]
   workflow_dispatch:
 permissions:
   contents: write

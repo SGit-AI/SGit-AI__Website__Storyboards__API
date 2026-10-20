@@ -1,5 +1,5 @@
 {
- "what": "One line per push to main, newest first: the repository's version (tools/version.json 'version'), the kit release it serves as newest, and what changed. site/build.py refuses a version without its line.",
+ "what": "One line per push to dev, newest first: the repository's version (tools/version.json 'version'), the kit release it serves as newest, and what changed. site/build.py refuses a version without its line.",
  "versions": [
   {
    "version": "v0.1.0",

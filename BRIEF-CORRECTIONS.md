@@ -1,6 +1,6 @@
 # Brief corrections
 
-The brief is shared with storyboards.sgit.ai, and so are its corrections: [SGit-AI__Website__Storyboards/BRIEF-CORRECTIONS.md](https://github.com/SGit-AI/SGit-AI__Website__Storyboards/blob/main/BRIEF-CORRECTIONS.md) holds the readings that shaped both repositories (the hosts, every version immutable with no aliases, the path shape). This file holds the ones that are only about the API.
+The brief is shared with storyboards.sgit.ai, and so are its corrections: [SGit-AI__Website__Storyboards/BRIEF-CORRECTIONS.md](https://github.com/SGit-AI/SGit-AI__Website__Storyboards/blob/dev/BRIEF-CORRECTIONS.md) holds the readings that shaped both repositories (the hosts, every version immutable with no aliases, the path shape). This file holds the ones that are only about the API.
 
 | Date | The brief, or the guidance, says | What was found | What was done |
 |---|---|---|---|

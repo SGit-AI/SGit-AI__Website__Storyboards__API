@@ -28,7 +28,7 @@ Its twin is **[storyboards.sgit.ai](https://storyboards.sgit.ai)** ([SGit-AI__We
 2. `python3 tools/release.py cut` copies `src/` to its folder and writes the manifest. It refuses a folder that exists.
 3. `python3 tools/release.py check` (CI, every commit) recomputes every hash of every release and fails if a published byte moved, or if `src/` changed without a bump.
 4. A new major: `python3 tools/release.py major --from vX.Y.Z` starts `src/` from that release, byte for byte.
-5. Add the line to `site/data/versions.json`, `python3 site/build.py`, `python3 site/check.py`, the tests, push to `main`. The deploy tags the version, publishes `www/` with every release folder, and asks the live host for every hash.
+5. Add the line to `site/data/versions.json`, `python3 site/build.py`, `python3 site/check.py`, the tests, push to `dev`. The deploy tags the version, publishes `www/` with every release folder, and asks the live host for every hash.
 
 Every push bumps `version`, even a documentation fix; only a change to `src/` cuts a `release`.
 

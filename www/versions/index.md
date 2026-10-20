@@ -1,6 +1,6 @@
 # Version history
 
-> One line per push to main: the repository's version, the kit release it serves, and what changed.
+> One line per push to dev: the repository's version, the kit release it serves, and what changed.
 
 *Source: <https://api.storyboards.sgit.ai/versions/index.html>.*
 

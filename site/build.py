@@ -143,14 +143,14 @@ def build(out):
         rmd += [f"| [{f['path']}]({b}{f['path']}) | {f['bytes']:,} | `{f['sha256']}` | {f.get('origin', 'written here')} |" for f in mv["files"]] + [""]
     emit("releases/index.html", "Releases", "Every release of the kit, every file, every hash.", "\n".join(rmd))
     vmd = "| Version | Date | Kit | What changed, and why |\n|---|---|---|---|\n" + "\n".join(f"| {h['version']} | {h['date']} | {h['release']} | {h['what']} |" for h in hist)
-    emit("versions/index.html", "Version history", "One line per push to main: the repository's version, the kit release it serves, and what changed.", vmd)
+    emit("versions/index.html", "Version history", "One line per push to dev: the repository's version, the kit release it serves, and what changed.", vmd)
     briefs = sorted((ROOT / "briefs").glob("*.md"), reverse=True)
     for f in briefs:
         m, body_md = front_matter(f.read_text(encoding="utf-8"))
         emit(f"brief/{f.stem}.html", m["title"], m.get("summary", ""), f"*{m.get('status', '')} · {m.get('date', '')} · {m.get('by', '')}*\n\n" + body_md)
     emit("brief/index.html", "The brief", "The words this site was built from, published in full, never edited afterwards.",
          "\n".join(f"- [{front_matter(f.read_text(encoding='utf-8'))[0]['title']}]({f.stem}.html)" for f in briefs) +
-         f"\n\nCorrections go in [BRIEF-CORRECTIONS.md]({REPO}/blob/main/BRIEF-CORRECTIONS.md), not in the brief.")
+         f"\n\nCorrections go in [BRIEF-CORRECTIONS.md]({REPO}/blob/dev/BRIEF-CORRECTIONS.md), not in the brief.")
     put("demo/pki.bundle.json", (ROOT / "tests/fixtures/pki.bundle.json").read_bytes())
     for a in ("site.css", "site.js"):
         put(f"assets/{a}", (HERE / "assets" / a).read_bytes())
