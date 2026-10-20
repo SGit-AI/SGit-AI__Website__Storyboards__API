@@ -30,6 +30,7 @@ jobs:
           python3 site/build.py --check
           python3 site/check.py
           node tests/test_formats.mjs
+          python3 tests/test_policy.py
   tag:
     runs-on: ubuntu-latest
     timeout-minutes: 5

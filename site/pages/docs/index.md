@@ -1,9 +1,10 @@
 ---
 title: Documentation
-summary: Everything needed to draw a storyboard with the kit, from two lines of HTML to the file format and the release rules.
+section: Start
+order: 0
+summary: Everything about the code: how to use the kit, the reference, how it works inside, how it is released and the policy that keeps every release immutable.
 ---
 
-- [Quick start](quick-start.html): the embed, and loading the files yourself.
-- [The format](format.html): a storyboard, a cast, a bundle, and every kind, pose, mood, setting and prop the renderer knows.
-- [The JavaScript](javascript.html): the four globals the release defines, and what each function takes.
-- [Versioning](versioning.html): the folder rule, the manifest, and how a release is cut.
+The storyboards themselves, and what they are for, are on [storyboards.sgit.ai](https://storyboards.sgit.ai/). This site is about the code that draws them: use it, read it, change it.
+
+{{TOC}}

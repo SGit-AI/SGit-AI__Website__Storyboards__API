@@ -1,4 +1,6 @@
 ---
+section: Reference
+order: 1
 title: The format
 summary: A storyboard is one JSON file, its cast another. Every field the renderer reads, and every word of its vocabulary.
 ---

@@ -64,6 +64,8 @@ jobs:
         run: python3 site/build.py --check && python3 site/check.py
       - name: formats.js, in Node
         run: node tests/test_formats.mjs
+      - name: ABP-SB-001, code immutability, against its hooks (tests/test_policy.py)
+        run: python3 tests/test_policy.py
   browser:
     runs-on: ubuntu-latest
     timeout-minutes: 10

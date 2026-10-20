@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Code immutability, as a behaviour policy, and the API site as the developer site · api.storyboards.sgit.ai</title>
+<meta name="description" content="Point releases without code releases are fine; the API site becomes the full developer site; code in a versioned path is immutable, written as an Agent Behaviour Policy and run as a hook.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/brief/2026-10-20__code-immutability-and-the-developer-site.html">
+<link rel="alternate" type="text/markdown" href="2026-10-20__code-immutability-and-the-developer-site.md">
+<meta property="og:title" content="Code immutability, as a behaviour policy, and the API site as the developer site">
+<meta property="og:description" content="Point releases without code releases are fine; the API site becomes the full developer site; code in a versioned path is immutable, written as an Agent Behaviour Policy and run as a hook.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/brief/2026-10-20__code-immutability-and-the-developer-site.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../policies/index.html">Policies</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="narrow">
+<article class="article"><h1>Code immutability, as a behaviour policy, and the API site as the developer site</h1><p class="lede">Point releases without code releases are fine; the API site becomes the full developer site; code in a versioned path is immutable, written as an Agent Behaviour Policy and run as a hook.</p><p><i>the person's words in a session, after both sites went live; acted on the same day · 2026-10-20 · Dinis Cruz, in the Claude Code session that built both sites</i></p>
+<p>The person's message, as typed into the session (a voice transcription, published unchanged), in answer to whether the API repository should keep a version that moves without a code release:</p>
+<blockquote>Now, I think it's okay to have point releases that don't have code releases. So you could, let's say, for example, you change the content or change some information on the API website. By the way, the API website should have also a full-blown website, because that's where I think... See, that would make sense to be the website where you have all of the explanation about the code, about the API. So that makes sense to have everything to do with the code itself, where the main CLI is about the functionality, about everything. So we can geek out, even like I think, yes, so that's where the API usage or information should live on that website, right? So in a way, the API makes sense to be a full-on developer-friendly website, which basically means that in this example, you can make changes to the API.cli that don't change the code. We just need to keep track of what are the latest releases, fundamentally. And the releases every time you touch the code. So basically, what it is, and this should have a rule, is that the code is immutable. So that's important. So the code, as soon as you have a code in the file path, that code could not be changed. So we need to have a rule for that. In fact, we need to have an agent behavior policy for that. And actually, can you read riskmandate.ai if you don't have a policy already? And because this is one of the projects we're working on, and we should actually create a policy that is on code immutability, which is exactly what we have here. So we should have a policy which should run as a hook, and we should also have both a policy normal and then a hook policy that basically gives the instructions, and let's see how it works, that code should never be changed. Which makes sense with our design, correct?</blockquote>
+<h2 id="as-the-agent-read-it">As the agent read it</h2>
+<div class="tablewrap"><table><thead><tr><th>The words</th><th>Read as</th><th>Done in</th></tr></thead><tbody><tr><td>"point releases that don't have code releases"</td><td>keep the two numbers: the repository's <code>version</code> moves on every push, the kit's <code>release</code> only when code changes</td><td><code>tools/version.json</code>; <a href="https://api.storyboards.sgit.ai/engineering/release-process.html">the release process</a></td></tr><tr><td>"a full-on developer-friendly website"</td><td>everything about the code lives on api.storyboards.sgit.ai: guides, reference, a live gallery, internals, the patches as diffs, every release with its diff, tests, CI, policies; storyboards.sgit.ai stays about what the storyboards are and do</td><td>the site, v0.2.0</td></tr><tr><td>"the main CLI", "the API.cli"</td><td>the main site and the API site (the transcription's word for "site")</td><td></td></tr><tr><td>"the code is immutable ... as soon as you have a code in the file path"</td><td>a release folder is protected from the moment it exists, pushed or not</td><td><a href="https://api.storyboards.sgit.ai/policies/code-immutability.html">ABP-SB-001</a></td></tr><tr><td>"an agent behavior policy ... read riskmandate.ai"</td><td>written in riskmandate.ai's and abp.sgit.ai's shape: mandate, grant, delta, barriers</td><td>the same</td></tr><tr><td>"a policy normal and then a hook policy that basically gives the instructions"</td><td>the prose page (an expectation on its own) and its compiled half, the JSON the hooks apply, with the instructions printed at session start and in every refusal</td><td><code>policies/code-immutability.policy.json</code>, <code>.claude/hooks/code_immutability.py</code></td></tr><tr><td>"let's see how it works"</td><td>tests that drive the hooks with real tool calls and real commits, refusals and allowed twins</td><td><code>tests/test_policy.py</code></td></tr></tbody></table></div></article>
+</main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="2026-10-20__code-immutability-and-the-developer-site.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>

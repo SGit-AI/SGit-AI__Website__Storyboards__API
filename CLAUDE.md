@@ -2,7 +2,7 @@
 
 Read first: `briefs/` (shared with storyboards.sgit.ai), `REALITY.md`, `BRIEF-CORRECTIONS.md` (here and in the twin), then `README.md`.
 
-The one rule: **a published release folder (`vX/vX.Y/vX.Y.Z/`) is never edited.** Not for a typo, not for a comment. `tools/release.py check` and CI enforce it. To change the kit: `release.py bump patch`, edit `src/`, `release.py cut`, add the line to `site/data/versions.json`, `site/build.py`, `site/check.py`, the tests. A new major starts from the last good release: `release.py major --from vX.Y.Z`.
+The one rule, behaviour policy ABP-SB-001 (`policies/code-immutability.md`): **a published release folder (`vX/vX.Y/vX.Y.Z/`) is never edited.** The hooks in `.claude/settings.json` deny it and ask before any change to the policy's own files; do not work around them, ask the person. Not for a typo, not for a comment. `tools/release.py check` and CI enforce it. To change the kit: `release.py bump patch`, edit `src/`, `release.py cut`, add the line to `site/data/versions.json`, `site/build.py`, `site/check.py`, the tests. A new major starts from the last good release: `release.py major --from vX.Y.Z`.
 
 Every push bumps `tools/version.json` "version" (a docs-only push too); only a change to `src/` moves "release".
 

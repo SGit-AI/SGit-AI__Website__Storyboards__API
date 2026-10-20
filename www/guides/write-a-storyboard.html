@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Write a storyboard · api.storyboards.sgit.ai</title>
+<meta name="description" content="From an empty file to a storyboard that validates, draws and embeds, in four steps.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/guides/write-a-storyboard.html">
+<link rel="alternate" type="text/markdown" href="write-a-storyboard.md">
+<meta property="og:title" content="Write a storyboard">
+<meta property="og:description" content="From an empty file to a storyboard that validates, draws and embeds, in four steps.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/guides/write-a-storyboard.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../policies/index.html">Policies</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="docs-main"><div class="docs"><aside class="toc" aria-label="Documentation"><p class="toc-h">Start</p><ul><li><a href="../docs/index.html">Documentation</a></li><li><a href="../docs/quick-start.html">Quick start</a></li></ul><p class="toc-h">Guides</p><ul><li><a href="../guides/write-a-storyboard.html" aria-current="page">Write a storyboard</a></li><li><a href="../guides/write-a-prop-pack.html">Write a prop pack</a></li><li><a href="../guides/render-in-a-build.html">Render in a build</a></li><li><a href="../guides/pin-a-release.html">Pin a release</a></li></ul><p class="toc-h">Reference</p><ul><li><a href="../docs/format.html">The format</a></li><li><a href="../docs/gallery.html">The gallery</a></li><li><a href="../docs/javascript.html">The JavaScript</a></li><li><a href="../docs/graph.html">The graph format</a></li></ul><p class="toc-h">Internals</p><ul><li><a href="../internals/architecture.html">How the kit works</a></li><li><a href="../internals/patches.html">The patches</a></li></ul><p class="toc-h">Engineering</p><ul><li><a href="../docs/versioning.html">The release rule</a></li><li><a href="../engineering/release-process.html">The release process</a></li><li><a href="../engineering/tests.html">Tests</a></li><li><a href="../engineering/ci.html">CI and the deploy</a></li></ul><p class="toc-h">Policies</p><ul><li><a href="../policies/index.html">Policies</a></li><li><a href="../policies/code-immutability.html">Code immutability</a></li></ul><p class="toc-h">Releases</p><ul><li><a href="../releases/index.html">Releases</a></li><li><a href="../releases/v0.1.0.html">Release v0.1.0</a></li></ul></aside><div class="docs-body"><article class="article"><h1>Write a storyboard</h1><p class="lede">From an empty file to a storyboard that validates, draws and embeds, in four steps.</p><h2 id="1-a-cast">1. A cast</h2>
+<p>A cast says who can appear and what they look like. Two characters are enough:</p>
+<pre><code class="lang-json">{
+  &quot;what&quot;: &quot;The cast of my first storyboard.&quot;,
+  &quot;characters&quot;: [
+    { &quot;id&quot;: &quot;rae&quot;, &quot;name&quot;: &quot;Rae&quot;, &quot;kind&quot;: &quot;human&quot;, &quot;pronouns&quot;: &quot;they/them&quot;, &quot;role&quot;: &quot;the one asking&quot;,
+      &quot;look&quot;: { &quot;skin&quot;: &quot;#d8a47f&quot;, &quot;hair&quot;: &quot;curly&quot;, &quot;hairColour&quot;: &quot;#3b2a20&quot;, &quot;shirt&quot;: &quot;#2563eb&quot;, &quot;trousers&quot;: &quot;#1f2937&quot;, &quot;accessory&quot;: &quot;glasses&quot; } },
+    { &quot;id&quot;: &quot;bot&quot;, &quot;name&quot;: &quot;Bot&quot;, &quot;kind&quot;: &quot;agent&quot;, &quot;pronouns&quot;: &quot;it/its&quot;, &quot;role&quot;: &quot;the one answering&quot;, &quot;look&quot;: { &quot;colour&quot;: &quot;#0f766e&quot; } }
+  ]
+}</code></pre>
+<p>The other fields a character can carry (<code>stands_for</code>, <code>personality</code>, <code>wants</code>, <code>fears</code>, <code>line</code>) are shown on a series' shelf and model sheet; the drawing reads only <code>kind</code> and <code>look</code>. Hair is <code>short</code>, <code>long</code>, <code>curly</code>, <code>bun</code>, <code>beanie</code> or <code>bald</code>; the accessory is <code>glasses</code>, <code>headphones</code>, <code>lanyard</code> or <code>none</code>.</p>
+<h2 id="2-a-storyboard">2. A storyboard</h2>
+<pre><code class="lang-json">{
+  &quot;slug&quot;: &quot;my-first-storyboard&quot;,
+  &quot;title&quot;: &quot;My first storyboard&quot;,
+  &quot;subtitle&quot;: &quot;Three panels.&quot;,
+  &quot;status&quot;: &quot;draft&quot;,
+  &quot;by&quot;: &quot;you, today&quot;,
+  &quot;scenes&quot;: [
+    { &quot;kind&quot;: &quot;cover&quot;, &quot;title&quot;: &quot;My first storyboard&quot;, &quot;subtitle&quot;: &quot;Three panels.&quot;,
+      &quot;cast&quot;: [ { &quot;who&quot;: &quot;rae&quot;, &quot;pose&quot;: &quot;wave&quot;, &quot;mood&quot;: &quot;happy&quot; }, { &quot;who&quot;: &quot;bot&quot;, &quot;pose&quot;: &quot;wave&quot;, &quot;mood&quot;: &quot;happy&quot; } ] },
+    { &quot;kind&quot;: &quot;scene&quot;, &quot;setting&quot;: &quot;office&quot;, &quot;caption&quot;: &quot;A question&quot;,
+      &quot;cast&quot;: [ { &quot;who&quot;: &quot;rae&quot;, &quot;x&quot;: 0.25, &quot;pose&quot;: &quot;think&quot;, &quot;mood&quot;: &quot;thinking&quot;, &quot;says&quot;: &quot;Is a panel really just JSON?&quot; },
+                { &quot;who&quot;: &quot;bot&quot;, &quot;x&quot;: 0.75, &quot;pose&quot;: &quot;point&quot;, &quot;mood&quot;: &quot;happy&quot;, &quot;says&quot;: &quot;Every stroke of it.&quot;, &quot;flip&quot;: true } ],
+      &quot;props&quot;: [ { &quot;kind&quot;: &quot;laptop&quot;, &quot;x&quot;: 0.5, &quot;y&quot;: 760, &quot;scale&quot;: 1.2 } ] },
+    { &quot;kind&quot;: &quot;punchline&quot;, &quot;setting&quot;: &quot;none&quot;, &quot;punchline&quot;: &quot;Change a line, redraw the panel.&quot;,
+      &quot;cast&quot;: [ { &quot;who&quot;: &quot;rae&quot;, &quot;x&quot;: 0.2, &quot;pose&quot;: &quot;arms-up&quot;, &quot;mood&quot;: &quot;excited&quot; } ] }
+  ]
+}</code></pre>
+<p>What the numbers mean: a panel is 1600 by 1000, the floor is at 900, <code>x</code> is 0 to 1 across the panel, a prop's <code>y</code> is in panel units (the line it stands on). <code>flip</code> turns a character to face left. <code>max</code> is the bubble's wrap width in characters (default 24); <code>lift</code> raises a bubble that would collide with another.</p>
+<h2 id="3-validate-it">3. Validate it</h2>
+<p><code>formats.js</code> runs the same checks every site's build does, in Node or a browser:</p>
+<pre><code class="lang-js">const F = require(&#x27;./formats.js&#x27;);            // from https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/formats.js
+const errors = F.validate(storyboard, cast);   // [] when good
+// a storyboard using the security props: F.validate(storyboard, cast, { props: F.PACKS.security })</code></pre>
+<p>An unknown character, kind, pose, mood, setting or prop is an error with the panel number in it. So is an evidence panel with neither a quote nor bars, a cover with no title, or a graph edge naming a node that does not exist.</p>
+<h2 id="4-see-it-and-put-it-on-a-page">4. See it, and put it on a page</h2>
+<p>Put the two in one bundle, <code>{ "storyboard": ..., "cast": ..., "packs": [] }</code>, serve it anywhere that sends <code>access-control-allow-origin</code> (GitHub Pages does), and:</p>
+<pre><code class="lang-html">&lt;script src=&quot;https://api.storyboards.sgit.ai/v0/v0.1/v0.1.0/embed.js&quot; defer&gt;&lt;/script&gt;
+&lt;sg-storyboard src=&quot;https://example.org/my-first-storyboard.bundle.json&quot;&gt;&lt;/sg-storyboard&gt;</code></pre>
+<p>The markdown script and the graph come from the same file: <code>F.toMarkdown(storyboard, cast)</code> and <code>F.toGraph(storyboard, cast)</code>. To see every kind, setting and prop drawn before you pick one, open <a href="../docs/gallery.html">the gallery</a>.</p>
+<h2 id="the-house-rules-the-origin-sites-follow">The house rules the origin sites follow</h2>
+<p>They are not enforced by the kit, but they are why the storyboards on storyboards.sgit.ai can be trusted: a line a character says is the storyboard's own words and the panel says so (<code>"not_a_quote": true</code>); an evidence panel quotes its <code>source</code> word for word; <code>note</code> says what the panel is for; characters use the pronouns their cast file gives.</p></article></div></div></main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="write-a-storyboard.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>

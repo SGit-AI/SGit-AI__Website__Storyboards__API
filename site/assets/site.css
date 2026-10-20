@@ -149,3 +149,24 @@ footer.site a{color:var(--dim)}
 }
 @media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
 @media print{nav.site,footer.site,.sb-tools,.formats,.embed-code{display:none}body{background:#fff}}
+
+/* api.storyboards.sgit.ai only: the documentation layout (contents on the left), diffs, hashes */
+main.docs-main{max-width:var(--wide)}
+.docs{display:grid;grid-template-columns:230px minmax(0,1fr);gap:2.2rem;align-items:start}
+.docs-body{min-width:0;max-width:52rem}
+.docs-body .article{max-width:none}
+.toc{position:sticky;top:4.2rem;max-height:calc(100vh - 5rem);overflow:auto;font-size:.88rem;padding:.4rem .2rem 1rem 0;border-right:1px solid var(--line)}
+.toc-h{font-family:var(--note);font-size:1.08rem;color:var(--fg);margin:1rem 0 .2rem}
+.toc-h:first-child{margin-top:.2rem}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li a{display:block;padding:.16rem .5rem;border-radius:6px;color:var(--dim);text-decoration:none}
+.toc li a:hover{color:var(--fg);background:var(--panel2)}
+.toc li a[aria-current="page"]{color:var(--fg);background:var(--panel);box-shadow:inset 3px 0 0 var(--accent)}
+pre.diff{font-size:.8rem;line-height:1.4;max-height:42rem}
+pre.diff .add{color:#15803d;background:color-mix(in srgb,#22c55e 12%,transparent);display:inline-block;width:100%}
+pre.diff .del{color:#b91c1c;background:color-mix(in srgb,#ef4444 12%,transparent);display:inline-block;width:100%}
+pre.diff .hunk{color:var(--accent-dk)}
+pre.diff .head{color:var(--dim);font-weight:600}
+code.hash{font-size:.72rem;word-break:break-all;background:none;padding:0}
+.docs-body .sb-viewer{margin-top:1rem}
+@media (max-width:900px){.docs{grid-template-columns:1fr}.toc{position:static;max-height:none;border-right:0;border-bottom:1px solid var(--line)}}

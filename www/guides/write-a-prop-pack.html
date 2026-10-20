@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Write a prop pack · api.storyboards.sgit.ai</title>
+<meta name="description" content="Teach the kit to draw a new thing, without touching the kit: a prop pack is one function that returns drawing functions.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/guides/write-a-prop-pack.html">
+<link rel="alternate" type="text/markdown" href="write-a-prop-pack.md">
+<meta property="og:title" content="Write a prop pack">
+<meta property="og:description" content="Teach the kit to draw a new thing, without touching the kit: a prop pack is one function that returns drawing functions.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/guides/write-a-prop-pack.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../policies/index.html">Policies</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="docs-main"><div class="docs"><aside class="toc" aria-label="Documentation"><p class="toc-h">Start</p><ul><li><a href="../docs/index.html">Documentation</a></li><li><a href="../docs/quick-start.html">Quick start</a></li></ul><p class="toc-h">Guides</p><ul><li><a href="../guides/write-a-storyboard.html">Write a storyboard</a></li><li><a href="../guides/write-a-prop-pack.html" aria-current="page">Write a prop pack</a></li><li><a href="../guides/render-in-a-build.html">Render in a build</a></li><li><a href="../guides/pin-a-release.html">Pin a release</a></li></ul><p class="toc-h">Reference</p><ul><li><a href="../docs/format.html">The format</a></li><li><a href="../docs/gallery.html">The gallery</a></li><li><a href="../docs/javascript.html">The JavaScript</a></li><li><a href="../docs/graph.html">The graph format</a></li></ul><p class="toc-h">Internals</p><ul><li><a href="../internals/architecture.html">How the kit works</a></li><li><a href="../internals/patches.html">The patches</a></li></ul><p class="toc-h">Engineering</p><ul><li><a href="../docs/versioning.html">The release rule</a></li><li><a href="../engineering/release-process.html">The release process</a></li><li><a href="../engineering/tests.html">Tests</a></li><li><a href="../engineering/ci.html">CI and the deploy</a></li></ul><p class="toc-h">Policies</p><ul><li><a href="../policies/index.html">Policies</a></li><li><a href="../policies/code-immutability.html">Code immutability</a></li></ul><p class="toc-h">Releases</p><ul><li><a href="../releases/index.html">Releases</a></li><li><a href="../releases/v0.1.0.html">Release v0.1.0</a></li></ul></aside><div class="docs-body"><article class="article"><h1>Write a prop pack</h1><p class="lede">Teach the kit to draw a new thing, without touching the kit: a prop pack is one function that returns drawing functions.</p><p>The kit draws six props of its own (<code>laptop</code>, <code>desk</code>, <code>book</code>, <code>board</code>, <code>phone</code>, <code>sign</code>). Everything else comes in a pack: <a href="../docs/gallery.html">the security pack</a> is pki.sgit.ai's keys, vaults and QR codes, packaged this way. A pack never edits <code>storyboard.js</code>; it registers itself, and a name the kit already has is ignored, so a pack cannot redraw a core prop.</p>
+<h2 id="the-shape">The shape</h2>
+<pre><code class="lang-js">(function () {
+  &#x27;use strict&#x27;;
+  const pack = function (k) {
+    // k holds the kit&#x27;s drawing primitives: draw, el, textBlock, wrap, INK, PAPER, FONT, TITLE, W, H, FLOOR
+    const { draw, textBlock, INK } = k;
+    return {
+      // every prop: g (an SVG group), rc (a Rough.js canvas), x (the centre, in panel units),
+      // y (the line it stands on), s (its scale), p (the prop&#x27;s own entry from the storyboard)
+      cup(g, rc, x, y, s, p) {
+        draw(g, rc.rectangle(x - 30 * s, y - 60 * s, 60 * s, 60 * s,
+          { fill: p.colour || &#x27;#fde68a&#x27;, fillStyle: &#x27;solid&#x27;, stroke: INK, strokeWidth: 2.4 }));
+        draw(g, rc.arc(x + 30 * s, y - 30 * s, 30 * s, 30 * s, -Math.PI / 2, Math.PI / 2, false, { stroke: INK, strokeWidth: 2.4 }));
+        if (p.label) textBlock(g, [p.label], x, y + 34 * s, 24 * s, { anchor: &#x27;middle&#x27; });
+      },
+    };
+  };
+  // before the kit loads, wait in the queue; after, register at once
+  if (window.StoryboardKit &amp;&amp; window.StoryboardKit.addProps) window.StoryboardKit.addProps(pack);
+  else (window.StoryboardPropPacks = window.StoryboardPropPacks || []).push(pack);
+})();</code></pre>
+<p>Then a storyboard can say <code>{ "kind": "cup", "x": 0.5, "y": 760, "label": "coffee" }</code>.</p>
+<h2 id="the-details-that-matter">The details that matter</h2>
+<ul><li><b>Use <code>draw(g, node)</code></b> to add a Rough.js shape: it appends the node and tags it (<code>class="ink"</code>) the way the kit's own props are. Animation needs nothing from you: when a panel is drawn, every unfilled path in it gets <code>pathLength="1"</code>, which is what lets it draw itself when the panel plays.</li><li><b>Seeded wobble.</b> Use <code>rc</code> for every shape. The canvas is seeded per panel, so a prop drawn with <code>rc</code> looks the same on every load and in every export; <code>Math.random()</code> would not. The security pack's QR code derives its modules from a hash of <code>p.text</code> for the same reason.</li><li><b>Text</b> goes through <code>textBlock(g, lines, x, y, size, { anchor, fill, weight, font })</code>, and <code>wrap(text, max)</code> splits it into lines.</li><li><b>Validation</b> does not know your kinds: pass them, <code>F.validate(storyboard, cast, { props: ['cup'] })</code>.</li></ul>
+<h2 id="shipping-a-pack-with-the-kit">Shipping a pack with the kit</h2>
+<p>A pack in your own page is yours to version. A pack that should load with <code>&lt;sg-storyboard packs="..."&gt;</code> belongs in this repository's <code>src/props/</code>, its kinds in <code>PACKS</code> in <code>formats.js</code> and in <code>embed.js</code>'s list, and ships in the next minor release, in a new folder, like every other change (<a href="../engineering/release-process.html">the release process</a>).</p></article></div></div></main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="write-a-prop-pack.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>

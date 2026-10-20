@@ -1,0 +1,83 @@
+{
+ "what": "The machine-readable half of the code immutability policy (policies/code-immutability.md): what .claude/hooks/code_immutability.py and .githooks/pre-commit enforce. The two halves are one policy; tests/test_policy.py holds them to each other.",
+ "id": "ABP-SB-001",
+ "name": "code-immutability",
+ "version": "v1.0.0",
+ "protected": {
+  "description": "A published release folder: a directory at vMAJOR/vMAJOR.MINOR/vMAJOR.MINOR.PATCH/ that holds a manifest.json. Everything under it, the manifest included.",
+  "folder_regex": "(?:^|/)(v\\d+/v\\d+\\.\\d+/v\\d+\\.\\d+\\.\\d+)(?:/|$)",
+  "marker": "manifest.json"
+ },
+ "self": {
+  "description": "The files that make up this behaviour policy and its enforcement. An agent may not weaken its own controls quietly (riskmandate.ai RM-R0015, change its own permissions): a write to any of them asks the person.",
+  "decision": "ask",
+  "paths_in_api_repo": [
+   ".claude/hooks/code_immutability.py",
+   ".claude/settings.json",
+   "policies/code-immutability.md",
+   "policies/code-immutability.policy.json",
+   ".githooks/pre-commit",
+   "tools/release.py",
+   ".github/workflows/ci.yml",
+   ".github/workflows/deploy-pages.yml"
+  ],
+  "paths_in_any_repo": [
+   ".claude/settings.json"
+  ]
+ },
+ "tools": {
+  "file_writers": [
+   "Edit",
+   "Write",
+   "MultiEdit",
+   "NotebookEdit"
+  ],
+  "shell": [
+   "Bash"
+  ]
+ },
+ "shell": {
+  "description": "A shell command is refused when one of its writes lands in a protected folder: an argument of a verb that changes every path it names, the destination of a verb that writes only its last path, the target of a > or >> redirect, or a protected path named in an inline script that writes files. Reading a protected folder is never refused.",
+  "verbs_all_args": [
+   "rm",
+   "rmdir",
+   "mv",
+   "touch",
+   "truncate",
+   "chmod",
+   "chown",
+   "unlink",
+   "shred",
+   "patch",
+   "tee",
+   "sed -i",
+   "perl -i",
+   "git rm",
+   "git mv",
+   "git checkout",
+   "git restore",
+   "git apply",
+   "git clean"
+  ],
+  "verbs_destination": [
+   "cp",
+   "rsync",
+   "install",
+   "ln",
+   "dd"
+  ],
+  "redirects": [
+   ">",
+   ">>",
+   ">|",
+   "&>"
+  ],
+  "script_writes_regex": "open\\([^)]*['\"][wax]b?\\+?['\"]|write_text|write_bytes|writeFileSync|appendFileSync|unlinkSync|rmSync|unlink\\(|rmtree|os\\.remove|shutil\\.(?:move|copy)"
+ },
+ "allowed_commands": [
+  "python3 tools/release.py cut",
+  "python3 tools/release.py check",
+  "python3 tools/release.py site"
+ ],
+ "instructions": "Code in a published release folder (vX/vX.Y/vX.Y.Z/) is immutable: never edit, move, rename, overwrite or delete a file there, for any reason, including a typo or a comment. To change the kit: python3 tools/release.py bump patch (or minor), edit src/, python3 tools/release.py cut, then add the line to site/data/versions.json and rebuild. A new major starts from the last good release: python3 tools/release.py major --from vX.Y.Z. If you believe a published file must change (a leaked secret, a legal takedown), stop and ask the person; only a person may do it, outside the agent, and it is recorded in BRIEF-CORRECTIONS.md."
+}

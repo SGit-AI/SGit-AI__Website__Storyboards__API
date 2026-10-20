@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://api.storyboards.sgit.ai/about/participant.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/brief/2026-10-20__code-immutability-and-the-developer-site.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/brief/2026-10-20__storyboards-sgit-ai.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/brief/</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/docs/format.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/docs/gallery.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/docs/graph.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/docs/</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/docs/javascript.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/docs/quick-start.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/docs/versioning.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/engineering/ci.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/engineering/release-process.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/engineering/tests.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/guides/pin-a-release.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/guides/render-in-a-build.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/guides/write-a-prop-pack.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/guides/write-a-storyboard.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/internals/architecture.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/internals/patches.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/policies/code-immutability.html</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/policies/</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/releases/</loc></url>
+<url><loc>https://api.storyboards.sgit.ai/releases/v0.1.0.html</loc></url>
 <url><loc>https://api.storyboards.sgit.ai/versions/</loc></url>
 </urlset>

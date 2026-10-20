@@ -1,4 +1,6 @@
 ---
+section: Reference
+order: 3
 title: The JavaScript
 summary: The four globals release {{RELEASE}} defines, and what each function takes and returns.
 ---

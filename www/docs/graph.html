@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The graph format · api.storyboards.sgit.ai</title>
+<meta name="description" content="A storyboard as a semantic graph, storyboards.sgit.ai/graph/v1: the node types, the edge verbs, and what each carries.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/docs/graph.html">
+<link rel="alternate" type="text/markdown" href="graph.md">
+<meta property="og:title" content="The graph format">
+<meta property="og:description" content="A storyboard as a semantic graph, storyboards.sgit.ai/graph/v1: the node types, the edge verbs, and what each carries.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/docs/graph.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../policies/index.html">Policies</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="docs-main"><div class="docs"><aside class="toc" aria-label="Documentation"><p class="toc-h">Start</p><ul><li><a href="../docs/index.html">Documentation</a></li><li><a href="../docs/quick-start.html">Quick start</a></li></ul><p class="toc-h">Guides</p><ul><li><a href="../guides/write-a-storyboard.html">Write a storyboard</a></li><li><a href="../guides/write-a-prop-pack.html">Write a prop pack</a></li><li><a href="../guides/render-in-a-build.html">Render in a build</a></li><li><a href="../guides/pin-a-release.html">Pin a release</a></li></ul><p class="toc-h">Reference</p><ul><li><a href="../docs/format.html">The format</a></li><li><a href="../docs/gallery.html">The gallery</a></li><li><a href="../docs/javascript.html">The JavaScript</a></li><li><a href="../docs/graph.html" aria-current="page">The graph format</a></li></ul><p class="toc-h">Internals</p><ul><li><a href="../internals/architecture.html">How the kit works</a></li><li><a href="../internals/patches.html">The patches</a></li></ul><p class="toc-h">Engineering</p><ul><li><a href="../docs/versioning.html">The release rule</a></li><li><a href="../engineering/release-process.html">The release process</a></li><li><a href="../engineering/tests.html">Tests</a></li><li><a href="../engineering/ci.html">CI and the deploy</a></li></ul><p class="toc-h">Policies</p><ul><li><a href="../policies/index.html">Policies</a></li><li><a href="../policies/code-immutability.html">Code immutability</a></li></ul><p class="toc-h">Releases</p><ul><li><a href="../releases/index.html">Releases</a></li><li><a href="../releases/v0.1.0.html">Release v0.1.0</a></li></ul></aside><div class="docs-body"><article class="article"><h1>The graph format</h1><p class="lede">A storyboard as a semantic graph, storyboards.sgit.ai/graph/v1: the node types, the edge verbs, and what each carries.</p><p><code>StoryboardFormats.toGraph(storyboard, cast, { url, seriesTitle })</code> returns <code>{ what, format, storyboard, nodes, edges }</code>. Every storyboard on storyboards.sgit.ai has one at <code>graph.json</code>. Nodes are things; edges are verbs a reader can say aloud, "panel 3 features Noor", "Noor says 'Two ways'", in the spirit of <a href="https://graphs.sgit.ai/">graphs.sgit.ai</a>.</p>
+<h2 id="nodes">Nodes</h2>
+<div class="tablewrap"><table><thead><tr><th>Type</th><th>Id</th><th>Carries</th></tr></thead><tbody><tr><td><code>storyboard</code></td><td><code>storyboard:&lt;slug&gt;</code></td><td>label (the title), subtitle, status, url</td></tr><tr><td><code>panel</code></td><td><code>panel:&lt;slug&gt;/&lt;n&gt;</code></td><td>label (caption, punchline or title), n, kind, text (the panel as one paragraph)</td></tr><tr><td><code>character</code>, <code>agent</code></td><td><code>character:&lt;id&gt;</code></td><td>label (the name)</td></tr><tr><td><code>prop</code></td><td><code>prop:&lt;kind&gt;</code></td><td>label</td></tr><tr><td><code>source</code></td><td><code>source:&lt;text&gt;</code></td><td>label</td></tr><tr><td><code>setting</code></td><td><code>setting:&lt;name&gt;</code></td><td>label</td></tr><tr><td><code>series</code>, <code>shelf</code>, <code>author</code></td><td><code>series:&lt;slug&gt;</code>, <code>shelf:&lt;title&gt;</code>, <code>author:&lt;name&gt;</code></td><td>label</td></tr></tbody></table></div>
+<p>A character, prop, source or setting is one node however many panels use it: that is what makes the graph worth having across storyboards.</p>
+<h2 id="edges">Edges</h2>
+<div class="tablewrap"><table><thead><tr><th>From</th><th>Verb</th><th>To</th><th>Carries</th></tr></thead><tbody><tr><td>storyboard</td><td><code>has_panel</code></td><td>panel</td><td>n</td></tr><tr><td>panel</td><td><code>next</code></td><td>panel</td><td></td></tr><tr><td>panel</td><td><code>features</code></td><td>character</td><td>pose, mood</td></tr><tr><td>character</td><td><code>says</code>, <code>thinks</code></td><td>panel</td><td>text</td></tr><tr><td>panel</td><td><code>shows</code></td><td>prop</td><td></td></tr><tr><td>panel</td><td><code>quotes</code></td><td>source</td><td>(the panel quotes it)</td></tr><tr><td>panel</td><td><code>drawn_from</code></td><td>source</td><td>(the panel is <code>not_a_quote</code>)</td></tr><tr><td>panel</td><td><code>cites</code></td><td>source</td><td>(an evidence card's source)</td></tr><tr><td>panel</td><td><code>set_in</code></td><td>setting</td><td></td></tr><tr><td>storyboard</td><td><code>part_of</code>, <code>on_shelf</code>, <code>made_by</code></td><td>series, shelf, author</td><td></td></tr></tbody></table></div>
+<p>The format is versioned in its <code>format</code> field. A change that removes or renames anything is a new format version, shipped in a new release.</p></article></div></div></main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="graph.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
 <meta property="og:title" content="The storyboard kit">
 <meta property="og:description" content="The code that draws every storyboard on storyboards.sgit.ai, served so any page can use it: one script tag, pinned to a folder that never changes.">
 <meta property="og:url" content="https://api.storyboards.sgit.ai/">
-<meta name="site-version" content="v0.1.1">
+<meta name="site-version" content="v0.2.0">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="v0/v0.1/v0.1.0/fonts.css">
 <link rel="stylesheet" href="v0/v0.1/v0.1.0/storyboard.css">
@@ -22,11 +22,11 @@
 <a class="skip" href="#main">Skip to the content</a>
 <nav class="site" aria-label="Site"><div class="row">
 <a class="brand" href="index.html">api.storyboards<span>.sgit.ai</span></a>
-<div class="nav-items"><a href="docs/index.html">Docs</a><a href="docs/quick-start.html">Quick start</a><a href="docs/format.html">Format</a><a href="docs/javascript.html">JavaScript</a><a href="docs/versioning.html">Versioning</a><a href="releases/index.html">Releases</a><a href="brief/index.html">The brief</a></div>
+<div class="nav-items"><a href="docs/index.html">Docs</a><a href="guides/write-a-storyboard.html">Guides</a><a href="docs/format.html">Reference</a><a href="docs/gallery.html">Gallery</a><a href="releases/index.html">Releases</a><a href="policies/index.html">Policies</a></div>
 <div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
 <a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
 <button type="button" class="theme" aria-label="Switch the theme">dark</button>
-<span class="ver">site <a href="versions/index.html" title="Release history of this repository">v0.1.1</a> &middot; kit <a href="v0/v0.1/v0.1.0/manifest.json">v0.1.0</a></span></div>
+<span class="ver">site <a href="versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="releases/v0.1.0.html">v0.1.0</a></span></div>
 </div></nav>
 <main id="main" class="narrow">
 <article class="article"><h1>The storyboard kit</h1><p class="lede">The code that draws every storyboard on storyboards.sgit.ai, served so any page can use it: one script tag, pinned to a folder that never changes.</p><p>A storyboard here is data: a JSON file naming who is in each panel, their pose and mood, what they say, the evidence and its source, and a cast file saying what each character looks like. This site serves the code that draws them, as sketchy SVG panels with <a href="https://roughjs.com">Rough.js</a>, in the reader's browser. <a href="https://storyboards.sgit.ai/">storyboards.sgit.ai</a> is where the storyboards live; this is what draws them, there and anywhere else.</p>
@@ -41,10 +41,11 @@
 <div class="tablewrap"><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td><a href="docs/quick-start.html">Quick start</a></td><td>Embed a storyboard, or load the kit's files yourself with integrity strings</td></tr><tr><td><a href="docs/format.html">The format</a></td><td>The storyboard and cast JSON, and the vocabulary the renderer knows</td></tr><tr><td><a href="docs/javascript.html">The JavaScript</a></td><td><code>StoryboardKit</code>, <code>StoryboardFormats</code>, <code>StoryboardExport</code> and <code>&lt;sg-storyboard&gt;</code></td></tr><tr><td><a href="docs/versioning.html">Versioning</a></td><td>Immutable folders, manifests, cutting a release, starting a major</td></tr><tr><td><a href="releases/index.html">Releases</a></td><td>Every release, every file, every hash</td></tr><tr><td><a href="brief/2026-10-20__storyboards-sgit-ai.html">The brief</a></td><td>The voice memo this was built from, in full</td></tr></tbody></table></div></article>
 </main>
 <footer class="site"><div class="row">
-<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
-<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a>, the first API site &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
 <div>&#9888; Participant disclosure: published by the sgit project. <a href="about/participant.html">Read the disclosure</a>.</div>
-<div>Site v0.1.1 &middot; kit v0.1.0 &middot; <a href="versions/index.html">version history</a> &middot; <a href="index.md">this page as markdown</a> &middot; <a href="llms.txt">llms.txt</a> &middot; <a href="releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="versions/index.html">version history</a> &middot; <a href="index.md">this page as markdown</a> &middot; <a href="llms.txt">llms.txt</a> &middot; <a href="releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
 </div></footer>
+
 </body>
 </html>

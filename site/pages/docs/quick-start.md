@@ -1,4 +1,6 @@
 ---
+section: Start
+order: 1
 title: Quick start
 summary: Draw a storyboard on any page, with the embed or with the kit's files loaded by hand.
 ---

@@ -32,7 +32,12 @@ try {
     await page.goto(`${HOST}/${rel}`);
     await page.waitForLoadState('networkidle');
     if (rel === 'index.html') await page.waitForSelector('sg-storyboard figure svg g', { timeout: 15000 });
-    if (shots && ['index.html', 'docs/format.html', 'releases/index.html'].includes(rel)) await page.screenshot({ path: join(shots, 'api-' + rel.replace(/\W+/g, '_') + '.png') });
+    if (rel === 'docs/gallery.html') {
+      await page.waitForSelector('.sb-deck .sb-slide svg g', { timeout: 15000 });
+      assert.ok(await page.locator('.sb-deck .sb-slide').count() >= 14, 'the gallery draws every specimen panel');
+      await page.waitForSelector('.sb-sheet figure svg g');
+    }
+    if (shots && ['index.html', 'docs/format.html', 'releases/index.html', 'docs/gallery.html', 'internals/patches.html', 'policies/code-immutability.html', 'releases/v0.1.0.html', 'internals/architecture.html'].includes(rel)) await page.screenshot({ path: join(shots, 'api-' + rel.replace(/\W+/g, '_') + '.png') });
     assert.deepEqual(errors, [], `${rel}: ${errors.join('; ')}`);
     await page.close();
     n++;

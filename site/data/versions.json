@@ -2,6 +2,12 @@
  "what": "One line per push to dev, newest first: the repository's version (tools/version.json 'version'), the kit release it serves as newest, and what changed. site/build.py refuses a version without its line.",
  "versions": [
   {
+   "version": "v0.2.0",
+   "date": "2026-10-20",
+   "release": "v0.1.0",
+   "what": "api.storyboards.sgit.ai becomes the developer site: guides (write a storyboard, write a prop pack, render in a build, pin a release), the reference with a live gallery of every kind, setting, prop, pose and mood, the graph format, how the kit works inside, every patch against the upstream files as a diff, a page per release, tests, CI, the release process, and a documentation sidebar. And ABP-SB-001, code immutability: the behaviour policy in riskmandate.ai's shape, its compiled half in JSON, a Claude Code hook that denies any change to a published release folder and asks before any change to its own controls, a git pre-commit hook, and tests/test_policy.py. The kit is unchanged: release v0.1.0."
+  },
+  {
    "version": "v0.1.1",
    "date": "2026-10-20",
    "release": "v0.1.0",

@@ -19,8 +19,12 @@ Its twin is **[storyboards.sgit.ai](https://storyboards.sgit.ai)** ([SGit-AI__We
 | `tools/provenance.json` | where each served file came from, copied into every manifest |
 | `tools/render.mjs` | headless rendering for a site's build (thumbnails, previews, SVG, PNG) |
 | `tools/live_check.py` | after a deploy: the live host serves every release's bytes |
-| `site/` | the website: `build.py` (to `www/`, committed), `check.py` (its gate), `pages/`, `data/versions.json` |
-| `tests/` | `test_formats.mjs` (Node), `test_render.mjs` and `test_site.mjs` (Chromium, the host routed to this tree), fixtures from both origin sites |
+| `site/` | the developer website: `build.py` (to `www/`, committed), `check.py` (its gate), `pages/` (guides, reference, internals, engineering), `gallery.py` (the specimen every kind, setting and prop is drawn from), `data/versions.json` |
+| `policies/` | the agent behaviour policies: `code-immutability.md` (ABP-SB-001, the prose) and `code-immutability.policy.json` (its compiled half, which the hooks read) |
+| `.claude/settings.json`, `.claude/hooks/` | the Claude Code hooks that enforce ABP-SB-001: SessionStart prints the rule, PreToolUse denies changes to published releases and asks before changes to the policy's own files |
+| `.githooks/pre-commit` | refuses a commit that changes a published release (`git config core.hooksPath .githooks`; the SessionStart hook sets it) |
+| `tools/upstream/` | the exact files the kit began as, hashed, so the site can show every patch as a diff |
+| `tests/` | `test_formats.mjs` (Node), `test_policy.py` (the hooks, with refusals and allowed twins), `test_render.mjs` and `test_site.mjs` (Chromium, the host routed to this tree), fixtures from both origin sites |
 
 ## The release rule
 
@@ -32,10 +36,15 @@ Its twin is **[storyboards.sgit.ai](https://storyboards.sgit.ai)** ([SGit-AI__We
 
 Every push bumps `version`, even a documentation fix; only a change to `src/` cuts a `release`.
 
+## Code immutability
+
+Code in a published release folder is never changed: the [behaviour policy](https://api.storyboards.sgit.ai/policies/code-immutability.html) (ABP-SB-001), enforced by the hooks above, `tools/release.py check` and CI.
+
 ## Run the tests
 
 ```bash
 node tests/test_formats.mjs
+python3 tests/test_policy.py
 node tests/test_render.mjs     # needs Playwright (npm install --no-save playwright@1.56.1) and its Chromium
 node tests/test_site.mjs
 ```

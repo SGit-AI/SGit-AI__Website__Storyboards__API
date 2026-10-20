@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The release process · api.storyboards.sgit.ai</title>
+<meta name="description" content="A patch, a minor and a major, step by step, with the commands, what each refuses to do, and what the website shows afterwards.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/engineering/release-process.html">
+<link rel="alternate" type="text/markdown" href="release-process.md">
+<meta property="og:title" content="The release process">
+<meta property="og:description" content="A patch, a minor and a major, step by step, with the commands, what each refuses to do, and what the website shows afterwards.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/engineering/release-process.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../policies/index.html">Policies</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="docs-main"><div class="docs"><aside class="toc" aria-label="Documentation"><p class="toc-h">Start</p><ul><li><a href="../docs/index.html">Documentation</a></li><li><a href="../docs/quick-start.html">Quick start</a></li></ul><p class="toc-h">Guides</p><ul><li><a href="../guides/write-a-storyboard.html">Write a storyboard</a></li><li><a href="../guides/write-a-prop-pack.html">Write a prop pack</a></li><li><a href="../guides/render-in-a-build.html">Render in a build</a></li><li><a href="../guides/pin-a-release.html">Pin a release</a></li></ul><p class="toc-h">Reference</p><ul><li><a href="../docs/format.html">The format</a></li><li><a href="../docs/gallery.html">The gallery</a></li><li><a href="../docs/javascript.html">The JavaScript</a></li><li><a href="../docs/graph.html">The graph format</a></li></ul><p class="toc-h">Internals</p><ul><li><a href="../internals/architecture.html">How the kit works</a></li><li><a href="../internals/patches.html">The patches</a></li></ul><p class="toc-h">Engineering</p><ul><li><a href="../docs/versioning.html">The release rule</a></li><li><a href="../engineering/release-process.html" aria-current="page">The release process</a></li><li><a href="../engineering/tests.html">Tests</a></li><li><a href="../engineering/ci.html">CI and the deploy</a></li></ul><p class="toc-h">Policies</p><ul><li><a href="../policies/index.html">Policies</a></li><li><a href="../policies/code-immutability.html">Code immutability</a></li></ul><p class="toc-h">Releases</p><ul><li><a href="../releases/index.html">Releases</a></li><li><a href="../releases/v0.1.0.html">Release v0.1.0</a></li></ul></aside><div class="docs-body"><article class="article"><h1>The release process</h1><p class="lede">A patch, a minor and a major, step by step, with the commands, what each refuses to do, and what the website shows afterwards.</p><p>There are two numbers in <code>tools/version.json</code>, and they move for different reasons:</p>
+<div class="tablewrap"><table><thead><tr><th>Number</th><th>Moves when</th><th>Example</th></tr></thead><tbody><tr><td><code>version</code></td><td>every push to <code>dev</code>, the release branch, including a documentation or CI change</td><td><code>v0.1.1</code>: a CI fix, no code changed</td></tr><tr><td><code>release</code></td><td>only when a file in <code>src/</code> changes; it names the folder cut</td><td><code>v0.1.0</code></td></tr></tbody></table></div>
+<p>A push that changes only the website or the tooling moves <code>version</code> and nothing a consumer loads. A push that changes code moves both, and adds a folder.</p>
+<h2 id="a-patch-a-fix-in-the-kit">A patch (a fix in the kit)</h2>
+<pre><code class="lang-bash">python3 tools/release.py bump patch     # tools/version.json and each src/ file&#x27;s VERSION: v0.1.0 -&gt; v0.1.1
+# edit src/; add or change the test that fails without the fix
+python3 tools/release.py cut            # src/ -&gt; v0/v0.1/v0.1.1/ with manifest.json; refuses if the folder exists
+python3 tools/release.py check          # every release&#x27;s hashes; src/ equals the newest
+# a line in site/data/versions.json: the version, the release, what changed and why
+python3 site/build.py &amp;&amp; python3 site/check.py
+node tests/test_formats.mjs &amp;&amp; node tests/test_render.mjs &amp;&amp; node tests/test_site.mjs
+git commit -am &quot;v0.1.1: what changed&quot; &amp;&amp; git push origin dev</code></pre>
+<p>On <code>dev</code> the deploy tags <code>v0.1.1</code>, publishes the website with every release folder, and <code>tools/live_check.py</code> asks the live host for the hash of every file of every release. Then re-pin the consuming site (<a href="../guides/pin-a-release.html">pin a release</a>).</p>
+<h2 id="a-minor-something-new-nothing-broken">A minor (something new, nothing broken)</h2>
+<p>The same, with <code>bump minor</code>: <code>v0.1.1</code> becomes <code>v0.2.0</code>, in <code>v0/v0.2/v0.2.0/</code>. New props, a new export, a new attribute on the embed.</p>
+<h2 id="a-major-something-a-consumer-must-change-for">A major (something a consumer must change for)</h2>
+<pre><code class="lang-bash">python3 tools/release.py major --from v0.2.3    # src/ becomes v0.2.3&#x27;s bytes, renamed v1.0.0
+# make only the changes that make it a major
+python3 tools/release.py cut                    # v1/v1.0/v1.0.0/</code></pre>
+<p>Starting from the last good release, not from whatever was in <code>src/</code>, means the first v1 differs from the last v0 by exactly the breaking change, and both folders stay published to compare.</p>
+<h2 id="a-documentation-change">A documentation change</h2>
+<p>Move <code>version</code> only (edit <code>tools/version.json</code> by hand, the next patch), add its line to <code>site/data/versions.json</code>, rebuild the site. <code>release.py check</code> passes because <code>src/</code> still equals the newest release.</p>
+<h2 id="what-refuses-what">What refuses what</h2>
+<div class="tablewrap"><table><thead><tr><th>Mistake</th><th>Stopped by</th></tr></thead><tbody><tr><td>Editing a file in a published folder</td><td><code>release.py check</code> (every hash), CI's comparison with <code>dev</code>, and the <a href="../policies/code-immutability.html">code immutability policy</a>'s hook in an agent session</td></tr><tr><td>Changing <code>src/</code> without a bump</td><td><code>release.py check</code>: "src/ differs from the published v0.1.0"</td></tr><tr><td>Cutting over an existing folder</td><td><code>release.py cut</code></td></tr><tr><td>Pushing to <code>dev</code> without a new version</td><td>CI's version check</td></tr><tr><td>A version without its history line</td><td><code>site/build.py</code></td></tr><tr><td>The live host serving other bytes</td><td><code>tools/live_check.py</code> after the deploy</td></tr></tbody></table></div></article></div></div></main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="release-process.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>

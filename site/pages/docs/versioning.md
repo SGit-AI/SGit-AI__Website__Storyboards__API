@@ -1,5 +1,7 @@
 ---
-title: Versioning
+section: Engineering
+order: 1
+title: The release rule
 summary: Every release is a folder at a path that names it, never changed once published, with a manifest of hashes. How it works and how a release is made.
 ---
 

@@ -1,0 +1,25 @@
+#!/usr/bin/env python3
+"""git pre-commit hook for ABP-SB-001, code immutability: refuses a commit that modifies, renames or deletes a file in a
+release folder that already exists in HEAD. Adding a new release folder (a cut) is allowed. Enabled per clone with
+`git config core.hooksPath .githooks` (the Claude Code SessionStart hook does it); CI's release check is the backstop."""
+import json
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+root = Path(subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True).strip())
+policy = json.loads((root / "policies/code-immutability.policy.json").read_text(encoding="utf-8"))
+rx = re.compile(policy["protected"]["folder_regex"])
+head = set(subprocess.run(["git", "ls-tree", "-r", "--name-only", "HEAD"], capture_output=True, text=True, cwd=root).stdout.split())
+published = {m.group(1) for p in head if (m := rx.search(p)) and f"{m.group(1)}/{policy['protected']['marker']}" in head}
+bad = []
+for line in subprocess.check_output(["git", "diff", "--cached", "--name-status", "-M"], text=True, cwd=root).splitlines():
+    status, *paths = line.split("\t")
+    for p in paths if status[0] in "MDR" else []:
+        m = rx.search(p)
+        if m and m.group(1) in published:
+            bad.append(f"{status[0]} {p}")
+if bad:
+    print(f"{policy['id']} ({policy['name']}): this commit changes a published release folder:\n  " + "\n  ".join(bad) + "\n" + policy["instructions"], file=sys.stderr)
+    sys.exit(1)

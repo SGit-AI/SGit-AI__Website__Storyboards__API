@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The patches · api.storyboards.sgit.ai</title>
+<meta name="description" content="Every line release v0.1.0 changes in the code it began from, as a diff.">
+<link rel="canonical" href="https://api.storyboards.sgit.ai/internals/patches.html">
+<link rel="alternate" type="text/markdown" href="patches.md">
+<meta property="og:title" content="The patches">
+<meta property="og:description" content="Every line release v0.1.0 changes in the code it began from, as a diff.">
+<meta property="og:url" content="https://api.storyboards.sgit.ai/internals/patches.html">
+<meta name="site-version" content="v0.2.0">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='4' y='10' width='56' height='44' rx='6' fill='%23fbf7ee' stroke='%2323262b' stroke-width='4'/%3E%3Ctext x='32' y='42' font-size='22' text-anchor='middle' font-family='monospace' fill='%230f766e'%3E%7B%7D%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/fonts.css">
+<link rel="stylesheet" href="../v0/v0.1/v0.1.0/storyboard.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script>window.StoryboardPrefsKey = 'api.storyboards.sgit.ai.v1';</script>
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the content</a>
+<nav class="site" aria-label="Site"><div class="row">
+<a class="brand" href="../index.html">api.storyboards<span>.sgit.ai</span></a>
+<div class="nav-items"><a href="../docs/index.html">Docs</a><a href="../guides/write-a-storyboard.html">Guides</a><a href="../docs/format.html">Reference</a><a href="../docs/gallery.html">Gallery</a><a href="../releases/index.html">Releases</a><a href="../policies/index.html">Policies</a></div>
+<div class="nav-tools"><a class="parent" href="https://sgit.ai" title="One of the sgit.ai network of sites">&#8599; part of <b>sgit.ai</b></a>
+<a class="parent" href="https://storyboards.sgit.ai/" title="Where the storyboards live">&#8599; storyboards</a>
+<button type="button" class="theme" aria-label="Switch the theme">dark</button>
+<span class="ver">site <a href="../versions/index.html" title="Release history of this repository">v0.2.0</a> &middot; kit <a href="../releases/v0.1.0.html">v0.1.0</a></span></div>
+</div></nav>
+<main id="main" class="docs-main"><div class="docs"><aside class="toc" aria-label="Documentation"><p class="toc-h">Start</p><ul><li><a href="../docs/index.html">Documentation</a></li><li><a href="../docs/quick-start.html">Quick start</a></li></ul><p class="toc-h">Guides</p><ul><li><a href="../guides/write-a-storyboard.html">Write a storyboard</a></li><li><a href="../guides/write-a-prop-pack.html">Write a prop pack</a></li><li><a href="../guides/render-in-a-build.html">Render in a build</a></li><li><a href="../guides/pin-a-release.html">Pin a release</a></li></ul><p class="toc-h">Reference</p><ul><li><a href="../docs/format.html">The format</a></li><li><a href="../docs/gallery.html">The gallery</a></li><li><a href="../docs/javascript.html">The JavaScript</a></li><li><a href="../docs/graph.html">The graph format</a></li></ul><p class="toc-h">Internals</p><ul><li><a href="../internals/architecture.html">How the kit works</a></li><li><a href="../internals/patches.html" aria-current="page">The patches</a></li></ul><p class="toc-h">Engineering</p><ul><li><a href="../docs/versioning.html">The release rule</a></li><li><a href="../engineering/release-process.html">The release process</a></li><li><a href="../engineering/tests.html">Tests</a></li><li><a href="../engineering/ci.html">CI and the deploy</a></li></ul><p class="toc-h">Policies</p><ul><li><a href="../policies/index.html">Policies</a></li><li><a href="../policies/code-immutability.html">Code immutability</a></li></ul><p class="toc-h">Releases</p><ul><li><a href="../releases/index.html">Releases</a></li><li><a href="../releases/v0.1.0.html">Release v0.1.0</a></li></ul></aside><div class="docs-body"><article class="article"><h1>The patches</h1><p class="lede">Every line release v0.1.0 changes in the code it began from, as a diff.</p><p>The kit began as files on two other sites. These are the exact differences between those files and release v0.1.0, computed by the build from <code>tools/upstream/</code> (each checked against its recorded SHA-256) and the published folder. Every other line is the upstream code, unchanged.</p><h2 id="storyboard.js">storyboard.js</h2><p class="small dim">Upstream: <a href="https://github.com/SGit-AI/SGit-AI__Website__Gen-Z-Developers/blob/e2a71808f2dbdc9d94167b9493b539f0c567b35c/assets/storyboard.js">gen-z-developers.sgit.ai assets/storyboard.js</a> (sha256 <code>86212ff563e0bb02…</code>). Four marked API PATCHes: prop packs, the preferences key, the vocabulary with VERSION and wire(), and an embed&#x27;s start view.</p><pre class="diff"><code><span class="head">--- gen-z-developers.sgit.ai assets/storyboard.js</span>
+<span class="head">+++ v0/v0.1/v0.1.0/storyboard.js</span>
+<span class="hunk">@@ -1,4 +1,8 @@</span>
+<span class="del">-/* Storyboards for Generation Z Developers: a storyboard is data (admin/content/storyboards/&lt;slug&gt;.json), the cast is data</span>
+<span class="del">- * (admin/content/storyboards/cast.json), and this file draws both, programmatically, as sketchy SVG panels with Rough.js.</span>
+<span class="add">+/* The storyboard kit, served by api.storyboards.sgit.ai at an immutable path per version (/vX/vX.Y/vX.Y.Z/storyboard.js).</span>
+<span class="add">+ * It began as gen-z-developers.sgit.ai&#x27;s assets/storyboard.js (commit e2a71808, sha256 86212ff5...); the changes since are</span>
+<span class="add">+ * marked API PATCH below and listed in this release&#x27;s manifest.json. Nothing else in the drawing was touched.</span>
+<span class="add">+ *</span>
+<span class="add">+ * Storyboards: a storyboard is data (&lt;slug&gt;.json), the cast is data (cast.json), and this file draws both,</span>
+<span class="add">+ * programmatically, as sketchy SVG panels with Rough.js.</span>
+  * Nothing is an image file and nothing is generated by a model: a panel is text that can be corrected and redrawn.
+  *
+<span class="hunk">@@ -237,4 +241,8 @@</span>
+     return { w, h };
+   }
+<span class="add">+  // API PATCH 1 (from pki.sgit.ai&#x27;s one local patch, generalised): prop packs. A pack is a function that receives the</span>
+<span class="add">+  // drawing primitives and returns { kind: drawFn }. Packs are read from window.StoryboardPropPacks (an array, so several</span>
+<span class="add">+  // can load) and window.StoryboardExtraProps (pki.sgit.ai&#x27;s original single hook), and StoryboardKit.addProps(pack)</span>
+<span class="add">+  // adds one after this file has loaded. The kit&#x27;s own props always win a name clash.</span>
+   const PROPS = {
+     laptop(g, rc, x, y, s) {
+<span class="hunk">@@ -263,4 +271,14 @@</span>
+     },
+   };
+<span class="add">+  const CORE_PROPS = Object.keys(PROPS);</span>
+<span class="add">+  function addProps(pack) {</span>
+<span class="add">+    const got = typeof pack === &#x27;function&#x27; ? pack({ draw, el, textBlock, wrap, INK, PAPER, FONT, TITLE, W, H, FLOOR }) : (pack || {});</span>
+<span class="add">+    for (const k in got) if (!CORE_PROPS.includes(k)) PROPS[k] = got[k];</span>
+<span class="add">+    return Object.keys(PROPS);</span>
+<span class="add">+  }</span>
+<span class="add">+  if (typeof window !== &#x27;undefined&#x27;) {</span>
+<span class="add">+    if (window.StoryboardExtraProps) addProps(window.StoryboardExtraProps);</span>
+<span class="add">+    (window.StoryboardPropPacks || []).forEach(addProps);</span>
+<span class="add">+  }</span>
+ 
+   // ------------------------------------------------------------ badges: explorer, villager, town planner
+<span class="hunk">@@ -518,5 +536,6 @@</span>
+   // How you like to look at panels (animation, view, panels per row, text under panels) is remembered here and nowhere
+   // else; a private window or blocked storage just gets the defaults. ?view=deck|grid|script overrides it for one visit.
+<span class="del">-  const PREFS_KEY = &#x27;genz.storyboards.v1&#x27;;</span>
+<span class="add">+  // API PATCH 2: the key is the page&#x27;s to name (window.StoryboardPrefsKey), so two sites never share one viewer&#x27;s settings</span>
+<span class="add">+  const PREFS_KEY = (typeof window !== &#x27;undefined&#x27; &amp;&amp; window.StoryboardPrefsKey) || &#x27;storyboards.v1&#x27;;</span>
+   const VIEWS = [&#x27;deck&#x27;, &#x27;grid&#x27;, &#x27;script&#x27;];
+   const POSES = [&#x27;stand&#x27;, &#x27;point&#x27;, &#x27;wave&#x27;, &#x27;arms-up&#x27;, &#x27;shrug&#x27;, &#x27;think&#x27;, &#x27;sit&#x27;];
+<span class="hunk">@@ -772,5 +791,6 @@</span>
+   function viewer(root) {
+     const data = JSON.parse(root.querySelector(&#x27;script.sb-data&#x27;).textContent);
+<span class="del">-    const prefs = loadPrefs(), asked = new URLSearchParams(location.search).get(&#x27;view&#x27;);</span>
+<span class="add">+    // API PATCH 4: an embed may ask for a view (data-start-view), which the address bar&#x27;s ?view= still overrides</span>
+<span class="add">+    const prefs = loadPrefs(), asked = new URLSearchParams(location.search).get(&#x27;view&#x27;) || root.dataset.startView;</span>
+     if (VIEWS.includes(asked)) prefs.view = asked;
+     if (!VIEWS.includes(prefs.view)) prefs.view = &#x27;deck&#x27;;
+<span class="hunk">@@ -929,12 +949,26 @@</span>
+   }
+ 
+<span class="del">-  window.StoryboardKit = { drawScene, drawCharacter, drawMap, drawGraph, badge, deck, grid, script, viewer, contact, modelSheet, castSheet, shelf, figure, sceneText, play, MOODS, POSES, W, H };</span>
+<span class="del">-  document.addEventListener(&#x27;DOMContentLoaded&#x27;, () =&gt; {</span>
+<span class="del">-    document.querySelectorAll(&#x27;.sb-viewer&#x27;).forEach(viewer);</span>
+<span class="del">-    document.querySelectorAll(&#x27;.sb-deck&#x27;).forEach(d =&gt; { if (!d.closest(&#x27;.sb-viewer&#x27;)) deck(d); });</span>
+<span class="del">-    document.querySelectorAll(&#x27;.sb-contact&#x27;).forEach(contact);</span>
+<span class="del">-    document.querySelectorAll(&#x27;.sb-sheet&#x27;).forEach(modelSheet);</span>
+<span class="del">-    document.querySelectorAll(&#x27;.sb-cast&#x27;).forEach(castSheet);</span>
+<span class="del">-    document.querySelectorAll(&#x27;.sbx&#x27;).forEach(shelf);</span>
+<span class="del">-  });</span>
+<span class="add">+  // API PATCH 3: the vocabulary the renderer knows, as data (formats.js validates against it), the version, addProps,</span>
+<span class="add">+  // and wire(root): the page wiring, callable on any root, which runs on DOMContentLoaded as before or at once when the</span>
+<span class="add">+  // file is loaded after it (an embed loads it late). A root is wired once.</span>
+<span class="add">+  const VOCAB = {</span>
+<span class="add">+    kinds: [&#x27;cover&#x27;, &#x27;scene&#x27;, &#x27;evidence&#x27;, &#x27;punchline&#x27;, &#x27;spectrum&#x27;, &#x27;map&#x27;, &#x27;graph&#x27;],</span>
+<span class="add">+    poses: POSES, moods: MOODS,</span>
+<span class="add">+    settings: [&#x27;none&#x27;, &#x27;office&#x27;, &#x27;interview&#x27;, &#x27;street&#x27;, &#x27;night&#x27;, &#x27;classroom&#x27;],</span>
+<span class="add">+    props: () =&gt; Object.keys(PROPS),</span>
+<span class="add">+  };</span>
+<span class="add">+  function wire(root) {</span>
+<span class="add">+    root = root || document;</span>
+<span class="add">+    const once = (sel, fn) =&gt; root.querySelectorAll(sel).forEach(e =&gt; { if (!e.dataset.sbWired) { e.dataset.sbWired = &#x27;1&#x27;; fn(e); } });</span>
+<span class="add">+    once(&#x27;.sb-viewer&#x27;, viewer);</span>
+<span class="add">+    once(&#x27;.sb-deck&#x27;, d =&gt; { if (!d.closest(&#x27;.sb-viewer&#x27;)) deck(d); });</span>
+<span class="add">+    once(&#x27;.sb-contact&#x27;, contact);</span>
+<span class="add">+    once(&#x27;.sb-sheet&#x27;, modelSheet);</span>
+<span class="add">+    once(&#x27;.sb-cast&#x27;, castSheet);</span>
+<span class="add">+    once(&#x27;.sbx&#x27;, shelf);</span>
+<span class="add">+  }</span>
+<span class="add">+  window.StoryboardKit = { drawScene, drawCharacter, drawMap, drawGraph, badge, deck, grid, script, viewer, contact, modelSheet, castSheet, shelf, figure, sceneText, play, MOODS, POSES, W, H,</span>
+<span class="add">+    addProps, wire, VOCAB, PAPER, INK, VERSION: &#x27;v0.1.0&#x27; };</span>
+<span class="add">+  if (document.readyState === &#x27;loading&#x27;) document.addEventListener(&#x27;DOMContentLoaded&#x27;, () =&gt; wire(document));</span>
+<span class="add">+  else wire(document);</span>
+ })();</code></pre><h2 id="props-security.js">props/security.js</h2><p class="small dim">Upstream: <a href="https://github.com/SGit-AI/SGit-AI__Website__PKI/blob/ab6affc9348ae390636405d2dd24b5db31a9663c/assets/storyboard/pki-props.js">pki.sgit.ai assets/storyboard/pki-props.js</a> (sha256 <code>a21f0a5eadef451e…</code>). The header comment, and registering as a pack instead of the single window.StoryboardExtraProps hook.</p><pre class="diff"><code><span class="head">--- pki.sgit.ai assets/storyboard/pki-props.js</span>
+<span class="head">+++ v0/v0.1/v0.1.0/props/security.js</span>
+<span class="hunk">@@ -1,5 +1,7 @@</span>
+<span class="del">-/* pki-props.js: the props pki.sgit.ai&#x27;s storyboards need and the gen-z kit does not have, drawn the same way (Rough.js,</span>
+<span class="del">- * sketchy, nothing an image). Loaded before assets/storyboard/storyboard.js, which merges them into its PROPS through</span>
+<span class="del">- * the one local patch in that file. Every prop is (g, rc, x, y, s, p): x the centre, y the line it stands on, s a</span>
+<span class="add">+/* props/security.js: the security prop pack (keys, vaults, QR codes, envelopes, signed records, servers, terminals),</span>
+<span class="add">+ * written for pki.sgit.ai&#x27;s storyboards as assets/storyboard/pki-props.js (commit ab6affc9) and drawn the same way as the</span>
+<span class="add">+ * kit&#x27;s own props (Rough.js, sketchy, nothing an image). Load it before or after storyboard.js: before, it waits in</span>
+<span class="add">+ * window.StoryboardPropPacks; after, it registers itself with StoryboardKit.addProps. API PATCH: only that registration</span>
+<span class="add">+ * (the last lines) differs from the pki.sgit.ai file. Every prop is (g, rc, x, y, s, p): x the centre, y the line it stands on, s a</span>
+  * scale, p the scene&#x27;s entry. A prop that names a `label` writes it under (or on) itself.
+  *
+<span class="hunk">@@ -19,5 +21,5 @@</span>
+ (function () {
+   &#x27;use strict&#x27;;
+<span class="del">-  window.StoryboardExtraProps = function (k) {</span>
+<span class="add">+  const pack = function (k) {</span>
+     const { draw, el, textBlock, wrap, INK, W } = k;
+     const ink = (o) =&gt; Object.assign({ stroke: INK, strokeWidth: 2.4 }, o || {});
+<span class="hunk">@@ -134,3 +136,6 @@</span>
+     };
+   };
+<span class="add">+  // API PATCH: register as a pack (several packs can load), at once if the kit is already here</span>
+<span class="add">+  if (window.StoryboardKit &amp;&amp; window.StoryboardKit.addProps) window.StoryboardKit.addProps(pack);</span>
+<span class="add">+  else (window.StoryboardPropPacks = window.StoryboardPropPacks || []).push(pack);</span>
+ })();</code></pre><h2 id="storyboard.css">storyboard.css</h2><p class="small dim">Upstream: <a href="https://github.com/SGit-AI/SGit-AI__Website__Gen-Z-Developers/blob/e2a71808f2dbdc9d94167b9493b539f0c567b35c/assets/storyboard.css">gen-z-developers.sgit.ai assets/storyboard.css</a> (sha256 <code>6d8c968a1c3ba7f3…</code>). Unchanged.</p><p class="small dim">No difference: the bytes are the same.</p></article></div></div></main>
+<footer class="site"><div class="row">
+<div><b>api.storyboards.sgit.ai</b>: the storyboard kit, in immutable versioned folders, and everything about its code. Code Apache-2.0; Rough.js MIT; fonts SIL OFL 1.1.</div>
+<div class="netline"><a href="https://storyboards.sgit.ai/">&#8599; storyboards.sgit.ai</a>, where the storyboards live &middot; <a href="https://riskmandate.ai/abp.html">&#8599; riskmandate.ai</a>, the shape of the policies &middot; <a href="https://sgit.ai">&#8599; sgit.ai</a> &middot; <a href="https://api.newsroom.sgit.ai/">&#8599; api.newsroom.sgit.ai</a> &middot; <a href="https://sgit.ai/network/index.html">&#8599; the network</a></div>
+<div>&#9888; Participant disclosure: published by the sgit project. <a href="../about/participant.html">Read the disclosure</a>.</div>
+<div>Site v0.2.0 &middot; kit v0.1.0 &middot; <a href="../versions/index.html">version history</a> &middot; <a href="patches.md">this page as markdown</a> &middot; <a href="../llms.txt">llms.txt</a> &middot; <a href="../releases.json">releases.json</a> &middot; <a href="https://github.com/SGit-AI/SGit-AI__Website__Storyboards__API">GitHub</a></div>
+</div></footer>
+
+</body>
+</html>
